@@ -1,0 +1,58 @@
+{
+  "name": "react-native-airship",
+  "version": "0.1.0",
+  "private": false,
+  "description": "Flexible toolkit for building modals & alerts",
+  "repository": "git@github.com:EdgeApp/react-native-airship",
+  "license": "MIT",
+  "author": "William Swanson <swansontec@gmail.com>",
+  "files": [
+    "/CHANGELOG.md",
+    "/demos.d.ts",
+    "/demos.js",
+    "/lib/*",
+    "/package.json",
+    "/README.md",
+    "/src/*"
+  ],
+  "main": "lib/Airship.js",
+  "scripts": {
+    "fix": "npm run lint -- --fix",
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx .",
+    "prepare": "tsc"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": "eslint"
+  },
+  "devDependencies": {
+    "@types/react": "^16.8.23",
+    "@types/react-native": "^0.60.2",
+    "@typescript-eslint/eslint-plugin": ">=2.0.0",
+    "@typescript-eslint/parser": "^2.0.0",
+    "eslint": ">=6.2.2",
+    "eslint-config-standard-kit": ">=0.14.2",
+    "eslint-plugin-import": ">=2.18.0",
+    "eslint-plugin-prettier": ">=3.0.0",
+    "eslint-plugin-promise": ">=4.2.1",
+    "eslint-plugin-react": ">=7.14.2",
+    "eslint-plugin-simple-import-sort": ">=4.0.0",
+    "eslint-plugin-standard": ">=4.0.0",
+    "husky": ">=3.0.0",
+    "import-sort-cli": "^6.0.0",
+    "import-sort-style-module": "^6.0.0",
+    "lint-staged": ">=9.0.0",
+    "prettier": ">=1.0.0",
+    "react-native-safe-area-view": "^0.14.6",
+    "typescript": "^3.5.3"
+  },
+  "importSort": {
+    ".js, .ts, .tsx": {
+      "style": "module"
+    }
+  }
+}
