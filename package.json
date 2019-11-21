@@ -19,7 +19,7 @@
   "scripts": {
     "fix": "npm run lint -- --fix",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx .",
-    "prepare": "tsc"
+    "prepare": "rimraf lib && tsc && cp src/Airship.flow.js lib/Airship.js.flow"
   },
   "husky": {
     "hooks": {
@@ -34,8 +34,10 @@
     "@types/react-native": "^0.60.2",
     "@typescript-eslint/eslint-plugin": ">=2.0.0",
     "@typescript-eslint/parser": "^2.0.0",
+    "babel-eslint": ">=10.0.0",
     "eslint": ">=6.2.2",
     "eslint-config-standard-kit": ">=0.14.2",
+    "eslint-plugin-flowtype": ">=4.3.0",
     "eslint-plugin-import": ">=2.18.0",
     "eslint-plugin-prettier": ">=3.0.0",
     "eslint-plugin-promise": ">=4.2.1",
@@ -48,6 +50,7 @@
     "lint-staged": ">=9.0.0",
     "prettier": ">=1.0.0",
     "react-native-safe-area-view": "^0.14.6",
+    "rimraf": "^3.0.0",
     "typescript": "^3.5.3"
   },
   "importSort": {
