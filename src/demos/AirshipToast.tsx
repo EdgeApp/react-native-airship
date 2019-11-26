@@ -6,9 +6,9 @@ import {
   Text,
   View
 } from 'react-native'
+import { SafeAreaConsumer } from 'react-native-safe-area-context'
 
 import { AirshipBridge } from '../Airship'
-import { LayoutContext } from './LayoutContext'
 
 const fadeInTime = 300
 const fadeOutTime = 1000
@@ -64,19 +64,19 @@ export class AirshipToast extends React.Component<Props> {
 
   render(): React.ReactNode {
     return (
-      <LayoutContext>
-        {metrics => {
-          const { safeAreaInsets } = metrics
+      <SafeAreaConsumer>
+        {insets => {
+          if (insets == null) insets = { bottom: 0, left: 0, right: 0, top: 0 }
 
           return (
-            <View pointerEvents="none" style={[styles.screen, safeAreaInsets]}>
+            <View pointerEvents="none" style={[styles.screen, insets]}>
               <Animated.View style={[styles.body, { opacity: this.opacity }]}>
                 {this.renderContent()}
               </Animated.View>
             </View>
           )
         }}
-      </LayoutContext>
+      </SafeAreaConsumer>
     )
   }
 

@@ -6,9 +6,9 @@ import {
   TouchableWithoutFeedback,
   View
 } from 'react-native'
+import { SafeAreaConsumer } from 'react-native-safe-area-context'
 
 import { AirshipBridge } from '../Airship'
-import { LayoutContext } from './LayoutContext'
 
 const slideInTime = 300
 const slideOutTime = 500
@@ -83,19 +83,19 @@ export class AirshipDropdown extends React.Component<Props> {
     } = this.props
 
     return (
-      <LayoutContext>
-        {metrics => {
-          const { safeAreaInsets } = metrics
+      <SafeAreaConsumer>
+        {insets => {
+          if (insets == null) insets = { bottom: 0, left: 0, right: 0, top: 0 }
 
           const screenStyle = {
-            bottom: safeAreaInsets.bottom,
-            left: safeAreaInsets.left,
-            right: safeAreaInsets.right,
+            bottom: insets.bottom,
+            left: insets.left,
+            right: insets.right,
             top: 0
           }
           const bodyStyle = {
             backgroundColor,
-            paddingTop: safeAreaInsets.top,
+            paddingTop: insets.top,
             transform: [{ translateY: this.offset }]
           }
 
@@ -109,7 +109,7 @@ export class AirshipDropdown extends React.Component<Props> {
             </View>
           )
         }}
-      </LayoutContext>
+      </SafeAreaConsumer>
     )
   }
 }

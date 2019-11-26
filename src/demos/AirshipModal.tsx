@@ -7,12 +7,12 @@ import {
   TouchableWithoutFeedback,
   ViewStyle
 } from 'react-native'
+import { EdgeInsets, SafeAreaConsumer } from 'react-native-safe-area-context'
 
 import { AirshipBridge } from '../Airship'
 import { KeyboardTracker } from './KeyboardTracker'
-import { LayoutContext, SafeAreaGap } from './LayoutContext'
 
-type ChildFunction = (gap: SafeAreaGap) => React.ReactNode
+type ChildFunction = (insets: EdgeInsets) => React.ReactNode
 
 interface Props {
   children: React.ReactNode | ChildFunction
@@ -26,11 +26,15 @@ interface Props {
   onCancel: () => unknown
 }
 
+interface State {
+  height: number
+}
+
 /**
  * A modal that slides a modal up from the bottom of the screen
  * and dims the rest of the app.
  */
-export class AirshipModal extends React.Component<Props> {
+export class AirshipModal extends React.Component<Props, State> {
   private backHandler: { remove(): unknown } | void = undefined
   private readonly opacity: Animated.Value
   private readonly offset: Animated.Value
@@ -39,6 +43,10 @@ export class AirshipModal extends React.Component<Props> {
     super(props)
     this.opacity = new Animated.Value(0)
     this.offset = new Animated.Value(Dimensions.get('window').height)
+    this.state = {
+      height: Dimensions.get('window').height
+    }
+    Dimensions.addEventListener('change', this.updateHeight)
   }
 
   componentDidMount(): void {
@@ -79,15 +87,23 @@ export class AirshipModal extends React.Component<Props> {
   }
 
   componentWillUnmount(): void {
+    Dimensions.removeEventListener('change', this.updateHeight)
     if (this.backHandler != null) this.backHandler.remove()
   }
 
+  private readonly updateHeight = (changes: {
+    window: { height: number }
+  }): void => this.setState({ height: changes.window.height })
+
+  /**
+   * Renders keyboard & screen tracking components,
+   * which allow the modal to properly size itself.
+   */
   render(): React.ReactNode {
     return (
-      <LayoutContext>
-        {metrics => {
-          const { layout, safeAreaInsets } = metrics
-          const downValue = safeAreaInsets.bottom
+      <SafeAreaConsumer>
+        {insets => {
+          const downValue = insets != null ? insets.bottom : 0
           function upValue(keyboardHeight: number): number {
             return Math.max(keyboardHeight, downValue)
           }
@@ -95,37 +111,33 @@ export class AirshipModal extends React.Component<Props> {
           return (
             <KeyboardTracker downValue={downValue} upValue={upValue}>
               {(keyboardAnimation, keyboardLayout) =>
-                this.renderModal(
-                  layout.height,
-                  safeAreaInsets,
-                  keyboardAnimation,
-                  keyboardLayout
-                )
+                this.renderModal(insets, keyboardAnimation, keyboardLayout)
               }
             </KeyboardTracker>
           )
         }}
-      </LayoutContext>
+      </SafeAreaConsumer>
     )
   }
 
   /**
-   * Draws the actual visual elements, given the current layout information:
+   * Draws the actual visual elements, given the current layout information.
    */
   private renderModal(
-    height: number,
-    gap: SafeAreaGap,
+    insets: EdgeInsets | null,
     keyboardAnimation: Animated.Value,
     keyboardLayout: number
   ): React.ReactNode {
     const { children, center = false } = this.props
+    const { height } = this.state
 
     // Set up the dynamic CSS values:
+    if (insets == null) insets = { bottom: 0, left: 0, right: 0, top: 0 }
     const screenPadding = {
       paddingBottom: keyboardAnimation,
-      paddingLeft: gap.left,
-      paddingRight: gap.right,
-      paddingTop: gap.top
+      paddingLeft: insets.left,
+      paddingRight: insets.right,
+      paddingTop: insets.top
     }
     const transform = [{ translateY: this.offset }]
     const bodyStyle = center
@@ -134,7 +146,8 @@ export class AirshipModal extends React.Component<Props> {
           styles.bottomBody,
           {
             marginBottom: -keyboardLayout,
-            maxHeight: keyboardLayout + 0.75 * (height - gap.bottom - gap.top),
+            maxHeight:
+              keyboardLayout + 0.75 * (height - insets.bottom - insets.top),
             paddingBottom: keyboardLayout,
             transform
           }
