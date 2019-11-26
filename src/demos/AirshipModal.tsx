@@ -22,6 +22,9 @@ interface Props {
   // or false for a bottom modal:
   center?: boolean
 
+  // This is to override the set body width for frame
+  styleOverride?: ViewStyle
+
   // Called when the user taps outside the modal or clicks the back button:
   onCancel: () => unknown
 }
@@ -128,7 +131,7 @@ export class AirshipModal extends React.Component<Props, State> {
     keyboardAnimation: Animated.Value,
     keyboardLayout: number
   ): React.ReactNode {
-    const { children, center = false } = this.props
+    const { children, center = false, styleOverride = {} } = this.props
     const { height } = this.state
 
     // Set up the dynamic CSS values:
@@ -141,7 +144,7 @@ export class AirshipModal extends React.Component<Props, State> {
     }
     const transform = [{ translateY: this.offset }]
     const bodyStyle = center
-      ? [styles.centerBody, { transform }]
+      ? [styles.centerBody, { transform, ...styleOverride }]
       : [
           styles.bottomBody,
           {
@@ -149,7 +152,8 @@ export class AirshipModal extends React.Component<Props, State> {
             maxHeight:
               keyboardLayout + 0.75 * (height - insets.bottom - insets.top),
             paddingBottom: keyboardLayout,
-            transform
+            transform,
+            ...styleOverride
           }
         ]
 
