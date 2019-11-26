@@ -75,4 +75,4 @@ There are several demo components in this repository. You can `import { ... } fr
 - AirshipModal - A white modal box. Dims the rest of the screen, so tapping outside will dismiss the modal.
 - AirshipToast - Emulates the Android Toast component in a cross-platform way.
 
-The demo components use `react-native-safe-area-view` to avoid the edges of the screen. You will need to install this library and link its native dependencies to use the demos.
+All the demo components use `react-native-safe-area-context` to avoid the edges of the screen. You will need to set up this library [according to its instructions](https://github.com/th3rdwave/react-native-safe-area-context#getting-started) before you you can uses these demos.
