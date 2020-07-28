@@ -62,7 +62,8 @@ export class KeyboardTracker extends React.Component<Props> {
       if (this.nextDuration !== 0) {
         Animated.timing(this.animation, {
           toValue: nextGoal,
-          duration: this.nextDuration
+          duration: this.nextDuration,
+          useNativeDriver: false
         }).start()
       } else {
         this.animation.setValue(nextGoal)

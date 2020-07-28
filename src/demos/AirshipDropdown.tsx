@@ -33,7 +33,7 @@ interface Props {
  */
 export class AirshipDropdown extends React.Component<Props> {
   offset: Animated.Value
-  timeout: NodeJS.Timeout | void
+  timeout: ReturnType<typeof setTimeout> | void
 
   constructor(props: Props) {
     super(props)
