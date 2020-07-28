@@ -18,6 +18,10 @@ export type AirshipBridge<T> = {
   onResult(callback: () => mixed): void
 }
 
+interface Props {
+  children?: React.Node;
+}
+
 /**
  * Renders a component to place inside the airship.
  */
@@ -31,11 +35,11 @@ type AirshipRender<T> = (bridge: AirshipBridge<T>) => React.Node
  * The method returns a promise, which the component can use to pass values
  * to the outside world.
  */
-type Airship = React.ComponentType<{}> & {
-  show<T>(render: AirshipRender<T>): Promise<T>
+declare export class Airship extends React.Component<Props> {
+  static show<T>(render: AirshipRender<T>): Promise<T>;
 }
 
 /**
  * Constructs an Airship component.
  */
-declare export function makeAirship(): Airship
+declare export function makeAirship(): typeof Airship
