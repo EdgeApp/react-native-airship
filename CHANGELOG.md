@@ -1,5 +1,9 @@
 # react-native-airship
 
+## 0.1.3 (2020-07-28)
+
+- Fix the Flow types for compatibility with older versions.
+
 ## 0.1.2 (2019-11-27)
 
 - Port the demos to `react-native-safe-area-context`.
