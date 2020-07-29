@@ -4,28 +4,25 @@ The airship floats above your React Native application, providing a place for mo
 
 <img alt="Glass sheet hovering above phone" src="./docs/isometric.png" width="400" />
 
-The Airship uses promises to represent component lifetimes, so you can `await` the user's feedback from whatever modal / menu / alert you are showing inside the airship.
-
-To place an item on the airship, just call the `Airship.show` method:
+To place an item on the airship, call the `Airship.show` method:
 
 ```javascript
 const answer = await Airship.show(bridge => (
-  <YesNoModal
-    onYes={() => {
-      bridge.resolve(true) // Resolves the promise
-      bridge.remove() // Un-mounts the component
-    }}
-    onNo={() => {
-      bridge.resolve(false)
-      bridge.remove()
-    }}
-  />
+  <YesNoModal bridge={bridge} question="Do you like questions?" />
 ))
 ```
 
-The UI element can control its own lifetime, as well as the returned promise, using methods on the `bridge` object.
+The `Airship.show` method returns a promise, so you can simply `await` the user's feedback. This is much simpler than the typical approach of setting up a router and writing custom state handling.
 
-## Usage
+Besides the generic `Airship` container, this library comes with a handful of ready-to-use UI components:
+
+- [AirshipDropdown](./docs/dropdown.md) - A drop-down alert.
+- [AirshipModal](./docs/modal.md) - A slide-up modal which dims the rest of the screen.
+- [AirshipToast](./docs/toast.md) - Emulates the Android Toast component in a cross-platform way.
+
+If these don't do what you want, you can easily [write your own components](./docs/custom-components.md) to work with Airship.
+
+## Setup
 
 Install `react-native-airship` using either NPM or yarn:
 
@@ -39,6 +36,7 @@ Next, create an Airship instance and place it outside your main scene or router:
 
 ```javascript
 // your-app.js:
+
 import { makeAirship } from 'react-native-airship'
 
 export const Airship = makeAirship()
@@ -58,25 +56,8 @@ import { Airship } from `./your-app.js`
 Airship.show(...);
 ```
 
-## Bridge Methods
+If you are on Android, and you have the StatusBar set to translucent, you must set the `statusBarTranslucent` property to true on the top-level Airship component. You
 
-Calling `Airship.show` is similar to calling `new Promise` - you receive some methods that you can use to control the resulting promise. The methods are placed on a `bridge` object, which makes them convenient to pass around as props, for example. The `bridge` object has the following methods:
+## Demo
 
-- `bridge.resolve` - Resolves the component lifetime promise.
-- `bridge.reject` - Rejects the component lifetime promise.
-- `bridge.remove` - Removes the component from the Airship.
-- `bridge.onResult(callback)` - Invokes the callback when the component lifetime promise settles (either resolved or rejected).
-
-A typical use-case is to use `bridge.onResult` to start some sort of fade-out animation. That way, calling either `bridge.resolve` or `bridge.reject` will not only settle the promise, but will also begin hiding the component. Once the animation completes, call `bridge.remove` to finally un-mount the component.
-
-## Demos
-
-There are several demo components in this repository. You can `import { ... } from 'react-native-airship/demos'` to use them directly. Since these components are just demos, they don't support a lot of customization. You are welcome to use them as starting point for writing your own components:
-
-- AirshipDropdown - A drop-down alert.
-- AirshipModal - A white modal box. Dims the rest of the screen, so tapping outside will dismiss the modal.
-- AirshipToast - Emulates the Android Toast component in a cross-platform way.
-
-There is also a demo application in the `AirshipDemo` folder of this git repository, which you can use to view the demos. Just run `yarn install` in that folder and then either `yarn android` or `yarn ios` to launch the application.
-
-All the demo components use `react-native-safe-area-context` to avoid the edges of the screen. You will need to set up this library [according to its instructions](https://github.com/th3rdwave/react-native-safe-area-context#getting-started) before you you can uses these demos.
+This repository includes a [demo application](./AirshipDemo/) you can use to try out the Airship. You will need to run `yarn install` or `npm install` separately in that folder to set up the demo, and then run either `react-native run-android` or `react-native run-ios` to start the demo.

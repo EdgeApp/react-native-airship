@@ -1,5 +1,6 @@
 import * as React from 'react'
-import { StyleSheet, View } from 'react-native'
+
+import { Wrapper } from './wrapper/Wrapper'
 
 /**
  * Control panel for managing a component inside an airship.
@@ -19,6 +20,8 @@ export interface AirshipBridge<T> {
 
 interface Props {
   children?: React.ReactNode
+  avoidAndroidKeyboard?: boolean
+  statusBarTranslucent?: boolean
 }
 
 /**
@@ -63,9 +66,13 @@ export function makeAirship(): Airship {
 
     render(): React.ReactNode {
       const wrappedChildren = allChildren.map(child => (
-        <View key={child.key} pointerEvents="box-none" style={styles.hover}>
+        <Wrapper
+          key={child.key}
+          statusBarTranslucent={this.props.statusBarTranslucent}
+          avoidAndroidKeyboard={this.props.avoidAndroidKeyboard}
+        >
           {child.element}
-        </View>
+        </Wrapper>
       ))
       return [this.props.children, ...wrappedChildren]
     }
@@ -102,18 +109,3 @@ export function makeAirship(): Airship {
 
   return AirshipContainer
 }
-
-const styles = StyleSheet.create({
-  hover: {
-    // Layout:
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    top: 0,
-
-    // Children:
-    flexDirection: 'row',
-    justifyContent: 'center'
-  }
-})

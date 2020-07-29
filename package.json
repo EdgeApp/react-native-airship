@@ -6,12 +6,10 @@
   "repository": "git@github.com:EdgeApp/react-native-airship",
   "license": "MIT",
   "author": "William Swanson <swansontec@gmail.com>",
-  "main": "lib/src/Airship.js",
-  "types": "lib/src/Airship.d.ts",
+  "main": "lib/src/index.js",
+  "types": "lib/src/index.d.ts",
   "files": [
     "/CHANGELOG.md",
-    "/demos.d.ts",
-    "/demos.js",
     "/lib/*",
     "/package.json",
     "/README.md",
@@ -20,7 +18,7 @@
   "scripts": {
     "fix": "npm run lint -- --fix",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx .",
-    "prepare": "rimraf lib && tsc && cp src/Airship.flow.js lib/src/Airship.js.flow && rimraf lib/AirshipDemo"
+    "prepare": "rimraf lib && tsc && cp src/index.flow.js lib/src/index.js.flow && rimraf lib/AirshipDemo"
   },
   "husky": {
     "hooks": {
@@ -51,5 +49,8 @@
     "react-native-safe-area-context": "^3.1.1",
     "rimraf": "^3.0.2",
     "typescript": "^3.9.7"
+  },
+  "dependencies": {
+    "react-native-safe-area-view": "^0.14.9"
   }
 }

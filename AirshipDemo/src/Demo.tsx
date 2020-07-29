@@ -1,150 +1,132 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
+
 import * as React from 'react'
 import {
+  Appearance,
+  Platform,
   SafeAreaView,
+  ScrollView,
   StatusBar,
   StyleSheet,
-  Text,
-  TouchableOpacity,
+  Switch,
   View
 } from 'react-native'
 import { makeAirship } from 'react-native-airship'
-import {
-  AirshipDropdown,
-  AirshipModal,
-  AirshipToast
-} from 'react-native-airship/demos'
+import { cacheStyles } from 'react-native-patina'
 
-import { theme } from './theme'
+import { CustomFloatingComponent } from './CustomFloatingComponent'
+import { TextInputModal } from './TextInputModal'
+import { ThemedDropdown } from './ThemedDropdown'
+import { ThemedToast } from './ThemedToast'
+import { ThemedButton } from './theming/ThemedButton'
+import { ThemedText } from './theming/ThemedText'
+import { changeTheme, Theme, ThemeProvider } from './theming/ThemeProvider'
+import { darkTheme, lightTheme } from './theming/themes'
 
 const Airship = makeAirship()
 
-interface State {
-  width: number
-}
+/**
+ * The demo app. This has a main scroll view with a handful of buttons
+ * for launching different Airship components.
+ */
+export const Demo = (props: {}): JSX.Element => {
+  // Switch states:
+  const [dark, setDark] = React.useState(Appearance.getColorScheme() === 'dark')
+  const [translucent, setTranslucent] = React.useState(true)
 
-export class Demo extends React.Component<{}, State> {
-  handleCenterModal = (): void => {
+  // Theming:
+  const theme = dark ? darkTheme : lightTheme
+  React.useEffect(() => {
+    changeTheme(theme)
+  }, [theme])
+  const styles = getStyles(theme)
+  const marginTop =
+    translucent && StatusBar.currentHeight != null ? StatusBar.currentHeight : 0
+
+  // Callbacks for demo components:
+  function handleModal(): void {
+    Airship.show(bridge => <TextInputModal bridge={bridge} />)
+  }
+  function handleCenterModal(): void {
+    Airship.show(bridge => <TextInputModal bridge={bridge} center />)
+  }
+  function handleDropdown(): void {
     Airship.show(bridge => (
-      <AirshipModal
-        bridge={bridge}
-        center
-        onCancel={() => bridge.resolve(false)}
-      >
-        <View style={{ padding: theme.rem(1) }}>
-          <Text style={styles.modalHeader}>A Modal</Text>
-          <Text style={styles.modalText}>
-            The Airship modal slides in from the bottom of the screen.
-          </Text>
-          <Button onPress={() => bridge.resolve(true)}>Sounds good</Button>
-        </View>
-      </AirshipModal>
-    )).catch(() => undefined)
+      <ThemedDropdown bridge={bridge}>Alert: This is a dropdown</ThemedDropdown>
+    ))
+  }
+  function handleToast(): void {
+    Airship.show(bridge => (
+      <ThemedToast bridge={bridge} message="Toast is happening..." />
+    ))
+  }
+  function handleCustom(): void {
+    Airship.show(bridge => <CustomFloatingComponent bridge={bridge} />)
   }
 
-  handleBottomModal = (): void => {
-    Airship.show(bridge => (
-      <AirshipModal bridge={bridge} onCancel={() => bridge.resolve(false)}>
-        <View style={{ padding: theme.rem(1) }}>
-          <Text style={styles.modalHeader}>A Modal</Text>
-          <Text style={styles.modalText}>
-            The Airship modal slides in from the bottom of the screen.
-          </Text>
-          <Button onPress={() => bridge.resolve(true)}>Sure</Button>
-        </View>
-      </AirshipModal>
-    )).catch(() => undefined)
-  }
-
-  handleDropdown = (): void => {
-    Airship.show(bridge => (
-      <AirshipDropdown bridge={bridge} backgroundColor={theme.modal}>
-        <Text style={styles.modalText}>Alert: This is a dropdown.</Text>
-      </AirshipDropdown>
-    )).catch(() => undefined)
-  }
-
-  handleToast = (): void => {
-    Airship.show(bridge => (
-      <AirshipToast bridge={bridge} message="Toast is happening..." />
-    )).catch(() => undefined)
-  }
-
-  render(): JSX.Element {
-    return (
-      <Airship>
-        <StatusBar barStyle="light-content" />
-        <SafeAreaView style={styles.container}>
-          <Text style={styles.header}>Airship Demo</Text>
-          <Button onPress={this.handleCenterModal}>Center Modal</Button>
-          <Button onPress={this.handleBottomModal}>Bottom Modal</Button>
-          <Button onPress={this.handleDropdown}>Dropdown</Button>
-          <Button onPress={this.handleToast}>Toast</Button>
+  return (
+    <ThemeProvider>
+      <Airship statusBarTranslucent={translucent}>
+        <StatusBar
+          backgroundColor="#00000000"
+          barStyle={dark && translucent ? 'light-content' : 'dark-content'}
+          translucent={translucent}
+        />
+        <SafeAreaView style={styles.screen}>
+          <ScrollView
+            style={{ flex: 1, marginTop }}
+            contentContainerStyle={styles.scrollContents}
+          >
+            <ThemedText header>Airship Demo</ThemedText>
+            <ThemedText>
+              Press some buttons to launch the demo components
+            </ThemedText>
+            <ThemedButton onPress={handleModal}>Modal</ThemedButton>
+            <ThemedButton onPress={handleCenterModal}>
+              Centered Modal
+            </ThemedButton>
+            <ThemedButton onPress={handleDropdown}>Dropdown</ThemedButton>
+            <ThemedButton onPress={handleToast}>Toast</ThemedButton>
+            <ThemedButton onPress={handleCustom}>Custom Component</ThemedButton>
+            <View style={styles.row}>
+              <ThemedText>Dark mode</ThemedText>
+              <Switch
+                onValueChange={setDark}
+                style={{ margin: theme.rem(1) }}
+                value={dark}
+              />
+            </View>
+            {Platform.OS === 'android' ? (
+              <View style={styles.row}>
+                <ThemedText>Translucent status bar</ThemedText>
+                <Switch
+                  onValueChange={setTranslucent}
+                  style={{ margin: theme.rem(1) }}
+                  value={translucent}
+                />
+              </View>
+            ) : null}
+          </ScrollView>
         </SafeAreaView>
       </Airship>
-    )
-  }
-}
-
-function Button(props: {
-  onPress: () => void
-  children: string | React.ReactNode
-}): JSX.Element {
-  const { children, onPress } = props
-  return (
-    <TouchableOpacity style={styles.button} onPress={onPress}>
-      {typeof children === 'string' ? (
-        <Text style={styles.buttonText}>{children}</Text>
-      ) : (
-        children
-      )}
-    </TouchableOpacity>
+    </ThemeProvider>
   )
 }
 
-const styles = StyleSheet.create({
-  container: {
+const getStyles = cacheStyles((theme: Theme) => ({
+  screen: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: theme.bakground,
+    backgroundColor: theme.background
+  },
+  scrollView: {
+    flex: 1
+  },
+  scrollContents: {
     padding: theme.rem(1)
   },
-  text: {
-    color: theme.text,
-    fontSize: theme.rem(1)
-  },
-  header: {
-    alignSelf: 'center',
-    color: theme.header,
-    fontSize: theme.rem(1.2),
-    margin: theme.rem(1),
-    marginBottom: 0
-  },
-
-  button: {
+  row: {
     alignItems: 'center',
-    backgroundColor: theme.button,
-    borderRadius: theme.rem(1),
-    justifyContent: 'center',
-    margin: theme.rem(1),
-    padding: theme.rem(1),
-    flexDirection: 'row'
-  },
-  buttonText: {
-    color: theme.buttonText,
-    fontSize: theme.rem(1)
-  },
-
-  modalHeader: {
-    alignSelf: 'center',
-    color: theme.modalHeader,
-    fontSize: theme.rem(1.2),
-    margin: theme.rem(1),
-    marginBottom: 0
-  },
-  modalText: {
-    alignSelf: 'center',
-    color: theme.modalText,
-    fontSize: theme.rem(1),
-    margin: theme.rem(1),
-    textAlign: 'left'
+    flexDirection: 'row',
+    justifyContent: 'space-between'
   }
-})
+}))
