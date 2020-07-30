@@ -1,3 +1,3 @@
-export { AirshipDropdown } from './lib/demos/AirshipDropdown'
-export { AirshipModal } from './lib/demos/AirshipModal'
-export { AirshipToast } from './lib/demos/AirshipToast'
+export { AirshipDropdown } from './lib/src/demos/AirshipDropdown'
+export { AirshipModal } from './lib/src/demos/AirshipModal'
+export { AirshipToast } from './lib/src/demos/AirshipToast'

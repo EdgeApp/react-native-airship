@@ -15,5 +15,5 @@
     "strict": true
   },
   "exclude": ["node_modules", "lib"],
-  "include": ["src"]
+  "include": ["AirshipDemo","src"]
 }

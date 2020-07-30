@@ -77,4 +77,6 @@ There are several demo components in this repository. You can `import { ... } fr
 - AirshipModal - A white modal box. Dims the rest of the screen, so tapping outside will dismiss the modal.
 - AirshipToast - Emulates the Android Toast component in a cross-platform way.
 
+There is also a demo application in the `AirshipDemo` folder of this git repository, which you can use to view the demos. Just run `yarn install` in that folder and then either `yarn android` or `yarn ios` to launch the application.
+
 All the demo components use `react-native-safe-area-context` to avoid the edges of the screen. You will need to set up this library [according to its instructions](https://github.com/th3rdwave/react-native-safe-area-context#getting-started) before you you can uses these demos.
