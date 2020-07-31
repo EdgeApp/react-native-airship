@@ -2,6 +2,8 @@
 
 The airship floats above your React Native application, providing a place for modals, alerts, menus, toasts, and anything else to appear on top of your normal UI.
 
+<img alt="Glass sheet hovering above phone" src="./docs/isometric.png" width="400" />
+
 The Airship uses promises to represent component lifetimes, so you can `await` the user's feedback from whatever modal / menu / alert you are showing inside the airship.
 
 To place an item on the airship, just call the `Airship.show` method:
