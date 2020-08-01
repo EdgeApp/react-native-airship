@@ -1,5 +1,9 @@
 # react-native-airship
 
+## 0.1.4 (2020-07-31)
+
+- Update the readme file with a cool image.
+
 ## 0.1.3 (2020-07-28)
 
 - Fix the Flow types for compatibility with older versions.
