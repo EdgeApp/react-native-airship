@@ -20,7 +20,7 @@
   "scripts": {
     "fix": "npm run lint -- --fix",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx .",
-    "prepare": "rimraf lib && tsc && cp src/Airship.flow.js lib/src/Airship.js.flow"
+    "prepare": "rimraf lib && tsc && cp src/Airship.flow.js lib/src/Airship.js.flow && rimraf lib/AirshipDemo"
   },
   "husky": {
     "hooks": {
