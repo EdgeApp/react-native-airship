@@ -51,12 +51,12 @@ export const App = () => (
 Now, anybody in your application can use this `Airship` instance to show things on top of the app:
 
 ```javascript
-import { Airship } from `./your-app.js`
+import { Airship } from './your-app.js'
 
-Airship.show(...);
+Airship.show(bridge => <AirshipToast bridge={bridge} message="Hey!" />)
 ```
 
-If you are on Android, and you have the StatusBar set to translucent, you must set the `statusBarTranslucent` property to true on the top-level Airship component.
+The top-level `Airship` component may need two additional properties on Android. If you have set your status bar to translucent, set the `statusBarTranslucent` property on the Airship to continue avoiding the top of the screen. Similarly, if you have changed `android:windowSoftInputMode` to `adjustPan` in your AndroidManifest.xml, you can use the Airship `avoidAndroidKeyboard` property to bring back the original keyboard-avoiding behavior (although this is optional - the Android OS provides reasonable default behavior without it).
 
 ## Demo
 
