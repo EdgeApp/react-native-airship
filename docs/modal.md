@@ -6,7 +6,7 @@ The modal component slides up from the bottom of the screen, while the rest of t
 
 The modal accepts a `bridge` property, which allows it to animate away & remove itself once the `Airship.show` promise resolves.
 
-The modal also requires an `onCancel` callback. The modal calls this whenver the user taps outside the modal or presses the phone's back button. The best approach is to call `bridge.resolve` or `bridge.reject` to dismiss the modal when this happens. Passing an empty `onCancel` function would make it hard for users to escape the modal, which nobody wants.
+The modal also requires an `onCancel` callback. The modal calls this whenever the user taps outside the modal or presses the phone's back button. The best approach is to call `bridge.resolve` or `bridge.reject` to dismiss the modal when this happens. Passing an empty `onCancel` function would make it hard for users to escape the modal, which nobody wants.
 
 The best way to use `AirshipModal` is to treat it as a building block for a larger modal component, which includes your various messages, buttons, or controls:
 

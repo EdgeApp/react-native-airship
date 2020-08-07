@@ -53,7 +53,7 @@ If you want your component to visually touch the screen edges while still keepin
 return <View style={{ marginTop: -64, paddingTop: 64 }}>{...contents}</View>
 ```
 
-By balancing the negative margin with an equal and opposite padding, the component will stretch outwards towards the edge of the screen while keeping its contents in the safe area. The exact amount of negative margin doesn't matter, as long as it is large enough to reach all the way to the edge (going over is fine). A conserative value like 64 is about 50% larger than the gap on an iPhone X, so it should be safe for most devices.
+By balancing the negative margin with an equal and opposite padding, the component will stretch outwards towards the edge of the screen while keeping its contents in the safe area. The exact amount of negative margin doesn't matter, as long as it is large enough to reach all the way to the edge (going over is fine). A conservative value like 64 is about 50% larger than the gap on an iPhone X, so it should be safe for most devices.
 
 ### Absolute Positioning
 

@@ -56,7 +56,7 @@ import { Airship } from `./your-app.js`
 Airship.show(...);
 ```
 
-If you are on Android, and you have the StatusBar set to translucent, you must set the `statusBarTranslucent` property to true on the top-level Airship component. You
+If you are on Android, and you have the StatusBar set to translucent, you must set the `statusBarTranslucent` property to true on the top-level Airship component.
 
 ## Demo
 

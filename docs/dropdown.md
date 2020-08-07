@@ -1,6 +1,6 @@
 # AirshipDropdown
 
-The dropdown component slides in from the top of the screen, hovers for 5 seconds, and then returns. It can have any contents you like, but it is most useful for alerts.
+The dropdown component slides in from the top of the screen. It can have any contents you like, but it is most useful for alerts.
 
 <img alt="Screen shot" src="./dropdown.png" width="300" />
 
