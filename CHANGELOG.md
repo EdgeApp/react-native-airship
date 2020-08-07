@@ -1,5 +1,15 @@
 # react-native-airship
 
+## 0.2.0
+
+With this version, the demo components become an official part of the library. The old `react-native-airship/demos` entry point has gone away, so you can import `AirshipDropdown`, `AirshipModal`, and `AirshipToast` directly from `react-native-airship` now.
+
+Since the demo components are meant to be directly usable, they now accept many more properties for controlling their appearance & behavior.
+
+The `activity` property on the `AirshipToast` has also gone away. See the [documentation](./docs/toast.md) for another way to achieve this same result.
+
+The `styleOverride` property on the `AirshipModal` has also gone away. Use the new appearance properties to make changes now.
+
 ## 0.1.4 (2020-07-31)
 
 - Update the readme file with a cool image.
