@@ -5,8 +5,8 @@ interface Edges {
   top: number
 }
 
-export function unpackEdges(Edges: number | number[] = 0): Edges {
-  const array = typeof Edges === 'number' ? [Edges] : Edges
+export function unpackEdges(edges: number | number[] = 0): Edges {
+  const array = typeof edges === 'number' ? [edges] : edges
   const top = array[0] != null ? array[0] : 0
   const right = array[1] != null ? array[1] : top
   const bottom = array[2] != null ? array[2] : top

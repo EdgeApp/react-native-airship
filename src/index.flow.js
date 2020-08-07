@@ -48,45 +48,45 @@ declare export function makeAirship(): typeof Airship
 /**
  * A drop-down alert.
  */
-export interface AirshipDropdownProps {
-  bridge: AirshipBridge<void>;
-  children: React.Node;
-  onPress?: () => void;
+export type AirshipDropdownProps = {
+  bridge: AirshipBridge<void>,
+  children?: React.Node,
+  onPress?: () => void,
 
-  autoHideMs?: number;
-  backgroundColor?: string;
-  borderRadius?: number;
-  flexDirection?: $PropertyType<ViewStyle, 'flexDirection'>;
-  justifyContent?: $PropertyType<ViewStyle, 'justifyContent'>;
-  margin?: number | number[];
-  maxHeight?: number;
-  maxWidth?: number;
-  padding?: number | number[];
-  slideInMs?: number;
-  slideOutMs?: number;
+  autoHideMs?: number,
+  backgroundColor?: string,
+  borderRadius?: number,
+  flexDirection?: $PropertyType<ViewStyle, 'flexDirection'>,
+  justifyContent?: $PropertyType<ViewStyle, 'justifyContent'>,
+  margin?: number | number[],
+  maxHeight?: number,
+  maxWidth?: number,
+  padding?: number | number[],
+  slideInMs?: number,
+  slideOutMs?: number
 }
 declare export class AirshipDropdown extends React.Component<AirshipDropdownProps> {}
 
 /**
  * A slide-up modal which dims the rest of the screen.
  */
-export interface AirshipModalProps<T = mixed> {
-  bridge: AirshipBridge<T>;
-  children: React.Node;
-  onCancel: () => void;
-  center?: boolean;
+export type AirshipModalProps<T = mixed> = {
+  bridge: AirshipBridge<T>,
+  children?: React.Node,
+  onCancel: () => void,
+  center?: boolean,
 
-  backgroundColor?: string;
-  borderRadius?: number;
-  flexDirection?: $PropertyType<ViewStyle, 'flexDirection'>;
-  justifyContent?: $PropertyType<ViewStyle, 'justifyContent'>;
-  margin?: number | number[];
-  maxHeight?: number;
-  maxWidth?: number;
-  padding?: number | number[];
-  slideInMs?: number;
-  slideOutMs?: number;
-  underlay?: string | React.Element<any>;
+  backgroundColor?: string,
+  borderRadius?: number,
+  flexDirection?: $PropertyType<ViewStyle, 'flexDirection'>,
+  justifyContent?: $PropertyType<ViewStyle, 'justifyContent'>,
+  margin?: number | number[],
+  maxHeight?: number,
+  maxWidth?: number,
+  padding?: number | number[],
+  slideInMs?: number,
+  slideOutMs?: number,
+  underlay?: string | React.Element<any>
 }
 declare export class AirshipModal extends React.Component<
   AirshipModalProps<mixed>
@@ -95,21 +95,21 @@ declare export class AirshipModal extends React.Component<
 /**
  * Emulates the Android Toast component in a cross-platform way.
  */
-export interface AirshipToastProps {
-  bridge: AirshipBridge<void>;
-  children?: React.Node;
-  message?: string;
+export type AirshipToastProps = {
+  bridge: AirshipBridge<void>,
+  children?: React.Node,
+  message?: string,
 
-  autoHideMs?: number;
-  backgroundColor?: string;
-  borderRadius?: number;
-  fadeInMs?: number;
-  fadeOutMs?: number;
-  margin?: number | number[];
-  maxWidth?: number;
-  opacity: number;
-  padding?: number | number[];
-  textColor: string;
-  textSize: number;
+  autoHideMs?: number,
+  backgroundColor?: string,
+  borderRadius?: number,
+  fadeInMs?: number,
+  fadeOutMs?: number,
+  margin?: number | number[],
+  maxWidth?: number,
+  opacity?: number,
+  padding?: number | number[],
+  textColor?: string,
+  textSize?: number
 }
 declare export class AirshipToast extends React.Component<AirshipToastProps> {}

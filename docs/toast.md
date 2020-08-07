@@ -94,7 +94,7 @@ export interface AirshipToastProps {
   maxWidth?: number
 
   // The opacity the component should fade to.
-  opacity: number
+  opacity?: number
 
   // Internal padding to place inside the component.
   // Takes 0-4 numbers (top, right, bottom, left),
@@ -102,9 +102,9 @@ export interface AirshipToastProps {
   padding?: number | number[]
 
   // The color to use for the text.
-  textColor: string
+  textColor?: string
 
   // The size of the text.
-  textSize: number
+  textSize?: number
 }
 ```
