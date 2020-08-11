@@ -1,5 +1,9 @@
 # react-native-airship
 
+## 0.2.1
+
+- Fix various Flow & documentation issues from the previous release.
+
 ## 0.2.0
 
 With this version, the demo components become an official part of the library. The old `react-native-airship/demos` entry point has gone away, so you can import `AirshipDropdown`, `AirshipModal`, and `AirshipToast` directly from `react-native-airship` now.
