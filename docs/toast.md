@@ -6,7 +6,7 @@ The AirshipToast emulates the Android Toast component in a cross-platform way.
 
 The toast accepts a `bridge` property, which allows it to animate away & remove itself once the `Airship.show` promise resolves.
 
-The toast ignores touch events (they pass right through), but it does auto-hide after a short timeout. You can use the `autoHideMs` prop to change timeout (or disable it).
+The toast ignores touch events (they pass right through), but it does auto-hide after a short timeout. You can use the `autoHideMs` prop to change the timeout (or disable it).
 
 Since the toast requires an `Airship` to be useful, a good approach is to wrap the toast in a short helper function:
 

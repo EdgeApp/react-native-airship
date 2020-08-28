@@ -3,6 +3,12 @@
   "version": "0.2.1",
   "private": false,
   "description": "Flexible toolkit for building modals & alerts",
+  "keywords": [
+    "react native",
+    "modal",
+    "alert",
+    "toast"
+  ],
   "repository": "git@github.com:EdgeApp/react-native-airship",
   "license": "MIT",
   "author": "William Swanson <swansontec@gmail.com>",
@@ -28,6 +34,9 @@
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": "eslint"
   },
+  "dependencies": {
+    "react-native-safe-area-view": "^0.14.9"
+  },
   "devDependencies": {
     "@types/react": "^16.9.43",
     "@types/react-native": "^0.63.2",
@@ -48,8 +57,5 @@
     "prettier": "^2.0.5",
     "rimraf": "^3.0.2",
     "typescript": "^3.9.7"
-  },
-  "dependencies": {
-    "react-native-safe-area-view": "^0.14.9"
   }
 }

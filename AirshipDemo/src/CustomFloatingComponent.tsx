@@ -11,14 +11,10 @@ interface Props {
  */
 export function CustomFloatingComponent(props: Props): JSX.Element {
   const { bridge } = props
+  React.useEffect(() => bridge.onResult(bridge.remove), [])
 
   return (
-    <TouchableOpacity
-      onPress={() => {
-        bridge.resolve()
-        bridge.remove()
-      }}
-    >
+    <TouchableOpacity onPress={() => bridge.resolve()}>
       <Text style={styles.text}>Tap to dismiss</Text>
     </TouchableOpacity>
   )
