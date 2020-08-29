@@ -103,7 +103,8 @@ export function AirshipDropdown(props: AirshipDropdownProps): JSX.Element {
     })
 
     // Animate out:
-    bridge.onResult(() => {
+    bridge.on('clear', () => bridge.resolve(undefined))
+    bridge.on('result', () => {
       Animated.timing(offset, {
         toValue: hiddenOffset,
         duration: slideOutMs,

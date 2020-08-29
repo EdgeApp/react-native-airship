@@ -1,8 +1,14 @@
 // @flow
 
 import * as React from 'react'
+import { type OnEvents, type Unsubscribe } from 'yavent'
 
-export type { Unsubscribe } from 'yavent'
+export type { Unsubscribe }
+
+type AirshipEvents = {
+  result: void,
+  clear: void
+}
 
 /**
  * Control panel for managing a component inside an airship.
@@ -15,8 +21,15 @@ export type AirshipBridge<T> = {
   // Unmounts the component:
   +remove: () => void,
 
+  // Subscribes to events.
+  // Use `on('result', callback)` to subscribe to
+  // the promise being resolved or rejected.
+  // Use `on('clear', callback)` to subscribe to
+  // the `Airship.clear` method being called.
+  +on: OnEvents<AirshipEvents>,
+
   // Runs a callback when the result promise settles.
-  // Useful for starting exit animations:
+  // Deprecated in favor of `on('result')`.
   +onResult: (callback: () => mixed) => void
 }
 
@@ -43,6 +56,7 @@ export interface AirshipProps {
  * to the outside world.
  */
 declare export class Airship extends React.Component<AirshipProps> {
+  static clear(): void;
   static show<T>(render: AirshipRender<T>): Promise<T>;
 }
 

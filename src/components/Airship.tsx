@@ -1,7 +1,13 @@
 import * as React from 'react'
-import { Event, makeEvent } from 'yavent'
+import { Event, Events, makeEvent, makeEvents } from 'yavent'
 
-import { Airship, AirshipBridge, AirshipProps, AirshipRender } from '../types'
+import {
+  Airship,
+  AirshipBridge,
+  AirshipEvents,
+  AirshipProps,
+  AirshipRender
+} from '../types'
 import { Wrapper } from './Wrapper'
 
 interface Guest {
@@ -14,6 +20,7 @@ interface Guest {
  */
 export function makeAirship(): Airship {
   // Static state shared by all mounted containers:
+  const [onClear, emitClear]: Event<void> = makeEvent()
   const [onGuestsChange, emitGuestsChange]: Event<Guest[]> = makeEvent()
   let guests: Guest[] = []
   let nextKey: number = 0
@@ -39,24 +46,38 @@ export function makeAirship(): Airship {
     )
   }
 
+  function clear(): void {
+    emitClear(undefined)
+  }
+
   function show<T>(render: AirshipRender<T>): Promise<T> {
     const key = `airship${nextKey++}`
 
     function remove(): void {
+      unclear()
       guests = guests.filter(guest => guest.key !== key)
       emitGuestsChange(guests)
     }
 
     // Assemble the bridge:
+    const [on, emit]: Events<AirshipEvents> = makeEvents()
     let bridge!: AirshipBridge<T>
     const promise: Promise<T> = new Promise((resolve, reject) => {
       bridge = {
-        onResult: callback => promise.then(callback, callback),
+        on,
+        onResult: callback => on('result', callback),
         reject,
         remove,
         resolve
       }
     })
+
+    // Hook up events:
+    promise.then(
+      () => emit('result', undefined),
+      () => emit('result', undefined)
+    )
+    const unclear = onClear(() => emit('clear', undefined))
 
     // Save the guest element in the shared state:
     guests = [...guests, { key, element: render(bridge) }]
@@ -64,5 +85,5 @@ export function makeAirship(): Airship {
     return promise
   }
 
-  return Object.assign(AirshipHost, { show })
+  return Object.assign(AirshipHost, { clear, show })
 }

@@ -11,7 +11,8 @@ interface Props {
  */
 export function CustomFloatingComponent(props: Props): JSX.Element {
   const { bridge } = props
-  React.useEffect(() => bridge.onResult(bridge.remove), [])
+  React.useEffect(() => bridge.on('clear', bridge.resolve), [])
+  React.useEffect(() => bridge.on('result', bridge.remove), [])
 
   return (
     <TouchableOpacity onPress={() => bridge.resolve()}>

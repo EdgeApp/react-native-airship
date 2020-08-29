@@ -1,4 +1,10 @@
 import * as React from 'react'
+import { OnEvents } from 'yavent'
+
+export interface AirshipEvents {
+  result: void
+  clear: void
+}
 
 /**
  * Control panel for managing a component inside an airship.
@@ -11,8 +17,15 @@ export interface AirshipBridge<T> {
   // Unmounts the component:
   remove: () => void
 
+  // Subscribes to events.
+  // Use `on('result', callback)` to subscribe to
+  // the promise being resolved or rejected.
+  // Use `on('clear', callback)` to subscribe to
+  // the `Airship.clear` method being called.
+  on: OnEvents<AirshipEvents>
+
   // Runs a callback when the result promise settles.
-  // Useful for starting exit animations:
+  // Deprecated in favor of `on('result')`.
   onResult: (callback: () => unknown) => void
 }
 
@@ -39,5 +52,6 @@ export interface AirshipProps {
  * to the outside world.
  */
 export interface Airship extends React.FunctionComponent<AirshipProps> {
+  clear(): void
   show<T>(render: AirshipRender<T>): Promise<T>
 }

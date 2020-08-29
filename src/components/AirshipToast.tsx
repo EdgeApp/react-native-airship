@@ -93,7 +93,8 @@ export function AirshipToast(props: AirshipToastProps): JSX.Element {
     })
 
     // Animate out:
-    bridge.onResult(() => {
+    bridge.on('clear', () => bridge.resolve(undefined))
+    bridge.on('result', () => {
       Animated.timing(opacity, {
         toValue: 0,
         duration: fadeOutMs,

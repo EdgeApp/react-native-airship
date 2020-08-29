@@ -5,7 +5,8 @@ Although the Airship library comes with a handful of built-in components, it is 
 ```javascript
 function CustomFloatingComponent(props) {
   const { bridge } = props
-  React.useEffect(() => bridge.onResult(bridge.remove), [])
+  React.useEffect(() => bridge.on('clear', bridge.resolve), [])
+  React.useEffect(() => bridge.on('result', bridge.remove), [])
 
   return (
     <TouchableOpacity onPress={() => bridge.resolve()}>
@@ -21,7 +22,7 @@ This component is completely functional, although it lacks pretty styling. See [
 
 Calling `Airship.show` is similar to calling `new Promise` - you receive some methods that you can use to control the resulting promise. The methods are placed on a `bridge` object, which makes them convenient to pass around as props.
 
-In this example, tapping the text calls `bridge.resolve` to resolve the promise. Once the promise resolves, the component un-mounts itself in response to the `bridge.onResult` callback.
+In this example, tapping the text calls `bridge.resolve` to resolve the promise. Once the promise resolves, the component un-mounts itself in response to the `bridge.on('result')` callback.
 
 ## Bridge Methods
 
@@ -30,9 +31,14 @@ The `bridge` object has the following methods:
 - `bridge.resolve` - Resolves the promise returned from `Airship.show`.
 - `bridge.reject` - Rejects the promise returned from `Airship.show`.
 - `bridge.remove` - Removes the component from the Airship.
-- `bridge.onResult(callback)` - Invokes the callback when the component lifetime promise settles (either resolved or rejected).
+- `bridge.on('result', callback)` - Invokes the callback when the component lifetime promise settles (either resolved or rejected).
+- `bridge.on('clear', callback)` - Invokes the callback whenever `Airship.clear` is called.
 
-A typical use-case is to use `bridge.onResult` to start some sort of fade-out animation. That way, calling either `bridge.resolve` or `bridge.reject` will not only settle the promise, but will also begin hiding the component. Once the animation completes, call `bridge.remove` to finally un-mount the component.
+A typical use-case is to use `bridge.on('result')` to start some sort of fade-out animation. That way, calling either `bridge.resolve` or `bridge.reject` will not only settle the promise, but will also begin hiding the component. Once the animation completes, call `bridge.remove` to finally un-mount the component.
+
+It is also a good idea to set up a `bridge.on('clear')` callback, so your component can remove itself when somebody calls `Airship.clear`.
+
+The bridge also has a deprecated `onResult` method, which is equivalent to calling `on('result')`. Do not use `onResult` method; it will go away in the next breaking release.
 
 ## Layout
 

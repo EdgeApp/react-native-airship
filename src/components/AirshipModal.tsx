@@ -87,6 +87,7 @@ export function AirshipModal<T>(props: AirshipModalProps<T>): JSX.Element {
   } = props
   const margin = unpackEdges(props.margin)
   const padding = unpackEdges(props.padding)
+  React.useEffect(() => bridge.on('clear', onCancel), [onCancel])
 
   // Create the animations:
   const offset = React.useRef(
@@ -109,7 +110,7 @@ export function AirshipModal<T>(props: AirshipModalProps<T>): JSX.Element {
     ]).start()
 
     // Animate out:
-    bridge.onResult(() =>
+    bridge.on('result', () => {
       Animated.parallel([
         Animated.timing(opacity, {
           toValue: 0,
@@ -121,8 +122,8 @@ export function AirshipModal<T>(props: AirshipModalProps<T>): JSX.Element {
           duration: slideOutMs,
           useNativeDriver: true
         })
-      ]).start(props.bridge.remove)
-    )
+      ]).start(bridge.remove)
+    })
   }, [])
 
   // Set up the back-button handler:
