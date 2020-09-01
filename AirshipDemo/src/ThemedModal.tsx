@@ -5,7 +5,7 @@ import { AirshipModal, AirshipModalProps } from 'react-native-airship'
 
 import { useTheme } from './theming/ThemeProvider'
 
-export function ThemedModal(props: AirshipModalProps): JSX.Element {
+export function ThemedModal<T>(props: AirshipModalProps<T>): JSX.Element {
   const { center = false } = props
   const theme = useTheme()
 

@@ -5,15 +5,15 @@ import * as React from 'react'
  */
 export interface AirshipBridge<T> {
   // Use these to pass values to the outside world:
-  resolve(value: T | PromiseLike<T>): void
-  reject(error: Error): void
+  resolve: (value: T | PromiseLike<T>) => void
+  reject: (error: Error) => void
 
   // Unmounts the component:
-  remove(): void
+  remove: () => void
 
   // Runs a callback when the result promise settles.
   // Useful for starting exit animations:
-  onResult(callback: () => unknown): void
+  onResult: (callback: () => unknown) => void
 }
 
 /**

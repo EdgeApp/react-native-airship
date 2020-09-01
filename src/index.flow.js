@@ -7,25 +7,30 @@ import * as React from 'react'
  */
 export type AirshipBridge<T> = {
   // Use these to pass values to the outside world:
-  resolve(value: T): void,
-  reject(error: Error): void,
+  +resolve: (value: T | Promise<T>) => void,
+  +reject: (error: Error) => void,
 
   // Unmounts the component:
-  remove(): void,
+  +remove: () => void,
 
   // Runs a callback when the result promise settles.
   // Useful for starting exit animations:
-  onResult(callback: () => mixed): void
-}
-
-interface Props {
-  children?: React.Node;
+  +onResult: (callback: () => mixed) => void
 }
 
 /**
  * Renders a component to place inside the airship.
  */
 type AirshipRender<T> = (bridge: AirshipBridge<T>) => React.Node
+
+/**
+ * Props the Airship container component accepts.
+ */
+export interface AirshipProps {
+  children?: React.Node;
+  avoidAndroidKeyboard?: boolean;
+  statusBarTranslucent?: boolean;
+}
 
 /**
  * The airship itself is a component you should mount after your main
@@ -35,7 +40,7 @@ type AirshipRender<T> = (bridge: AirshipBridge<T>) => React.Node
  * The method returns a promise, which the component can use to pass values
  * to the outside world.
  */
-declare export class Airship extends React.Component<Props> {
+declare export class Airship extends React.Component<AirshipProps> {
   static show<T>(render: AirshipRender<T>): Promise<T>;
 }
 
@@ -78,7 +83,7 @@ declare export class AirshipDropdown extends React.Component<AirshipDropdownProp
 /**
  * A slide-up modal which dims the rest of the screen.
  */
-export type AirshipModalProps<T = mixed> = {
+export type AirshipModalProps<T> = {
   bridge: AirshipBridge<T>,
   children?: React.Node,
   onCancel: () => void,
@@ -96,8 +101,8 @@ export type AirshipModalProps<T = mixed> = {
   slideOutMs?: number,
   underlay?: string | React.Element<any>
 }
-declare export class AirshipModal extends React.Component<
-  AirshipModalProps<mixed>
+declare export class AirshipModal<T> extends React.Component<
+  AirshipModalProps<T>
 > {}
 
 /**

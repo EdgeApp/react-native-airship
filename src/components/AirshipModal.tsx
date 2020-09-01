@@ -69,7 +69,7 @@ const safeAreaGap = 64
  * A modal that slides a modal up from the bottom of the screen
  * and dims the rest of the app.
  */
-export function AirshipModal(props: AirshipModalProps): JSX.Element {
+export function AirshipModal<T>(props: AirshipModalProps<T>): JSX.Element {
   const {
     bridge,
     children,
