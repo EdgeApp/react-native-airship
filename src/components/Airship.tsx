@@ -1,73 +1,68 @@
 import * as React from 'react'
+import { Event, makeEvent } from 'yavent'
 
 import { Airship, AirshipBridge, AirshipProps, AirshipRender } from '../types'
 import { Wrapper } from './Wrapper'
+
+interface Guest {
+  key: string
+  element: React.ReactNode
+}
 
 /**
  * Constructs an Airship component.
  */
 export function makeAirship(): Airship {
   // Static state shared by all mounted containers:
+  const [onGuestsChange, emitGuestsChange]: Event<Guest[]> = makeEvent()
+  let guests: Guest[] = []
   let nextKey: number = 0
-  let allChildren: Array<{ key: string; element: React.ReactNode }> = []
-  let allContainers: AirshipContainer[] = []
 
-  function updateContainers(): void {
-    for (const container of allContainers) container.forceUpdate()
+  const AirshipHost: React.FunctionComponent<AirshipProps> = props => {
+    const { children, avoidAndroidKeyboard, statusBarTranslucent } = props
+    const [ourGuests, setGuests] = React.useState(guests)
+    React.useEffect(() => onGuestsChange(setGuests), [])
+
+    return (
+      <>
+        {children}
+        {ourGuests.map(guest => (
+          <Wrapper
+            key={guest.key}
+            avoidAndroidKeyboard={avoidAndroidKeyboard}
+            statusBarTranslucent={statusBarTranslucent}
+          >
+            {guest.element}
+          </Wrapper>
+        ))}
+      </>
+    )
   }
 
-  class AirshipContainer extends React.Component<AirshipProps> {
-    constructor(props: AirshipProps) {
-      super(props)
-      allContainers.push(this)
+  function show<T>(render: AirshipRender<T>): Promise<T> {
+    const key = `airship${nextKey++}`
+
+    function remove(): void {
+      guests = guests.filter(guest => guest.key !== key)
+      emitGuestsChange(guests)
     }
 
-    componentWillUnmount(): void {
-      allContainers = allContainers.filter(item => item !== this)
-    }
-
-    render(): React.ReactNode {
-      const wrappedChildren = allChildren.map(child => (
-        <Wrapper
-          key={child.key}
-          statusBarTranslucent={this.props.statusBarTranslucent}
-          avoidAndroidKeyboard={this.props.avoidAndroidKeyboard}
-        >
-          {child.element}
-        </Wrapper>
-      ))
-      return [this.props.children, ...wrappedChildren]
-    }
-
-    static show<T>(render: AirshipRender<T>): Promise<T> {
-      // Assemble the bridge:
-      const key = `airship${nextKey++}`
-      const bridge: AirshipBridge<T> = {
-        onResult(callback) {
-          promise.then(callback, callback)
-        },
-        remove() {
-          allChildren = allChildren.filter(child => child.key !== key)
-          updateContainers()
-        },
-        resolve() {
-          // Will be replaced
-        },
-        reject() {
-          // Will be replaced
-        }
+    // Assemble the bridge:
+    let bridge!: AirshipBridge<T>
+    const promise: Promise<T> = new Promise((resolve, reject) => {
+      bridge = {
+        onResult: callback => promise.then(callback, callback),
+        reject,
+        remove,
+        resolve
       }
-      const promise: Promise<T> = new Promise((resolve, reject) => {
-        bridge.resolve = resolve
-        bridge.reject = reject
-      })
+    })
 
-      // Save the child element in the shared state:
-      allChildren.push({ key, element: render(bridge) })
-      updateContainers()
-      return promise
-    }
+    // Save the guest element in the shared state:
+    guests = [...guests, { key, element: render(bridge) }]
+    emitGuestsChange(guests)
+    return promise
   }
 
-  return AirshipContainer
+  return Object.assign(AirshipHost, { show })
 }

@@ -2,6 +2,8 @@
 
 import * as React from 'react'
 
+export type { Unsubscribe } from 'yavent'
+
 /**
  * Control panel for managing a component inside an airship.
  */

@@ -1,3 +1,5 @@
+export { Unsubscribe } from 'yavent'
+
 export { makeAirship } from './components/Airship'
 export {
   AirshipDropdown,

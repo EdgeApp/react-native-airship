@@ -38,6 +38,6 @@ export interface AirshipProps {
  * The method returns a promise, which the component can use to pass values
  * to the outside world.
  */
-export interface Airship extends React.ComponentClass<AirshipProps> {
+export interface Airship extends React.FunctionComponent<AirshipProps> {
   show<T>(render: AirshipRender<T>): Promise<T>
 }

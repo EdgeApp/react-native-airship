@@ -3476,6 +3476,7 @@ react-native-airship@./..:
   version "0.2.1"
   dependencies:
     react-native-safe-area-view "^0.14.9"
+    yavent "^0.1.0"
 
 react-native-patina@^0.1.3:
   version "0.1.3"
@@ -4455,3 +4456,8 @@ yargs@^15.1.0:
     which-module "^2.0.0"
     y18n "^4.0.0"
     yargs-parser "^18.1.2"
+
+yavent@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/yavent/-/yavent-0.1.0.tgz#4f0d774947e444600e8a73c6c25bc60af72389f5"
+  integrity sha512-dit/qHYGmc/fh4kaqIxWLHWRHEfxMPrSla8S6a4LMKFnb6oCsNDJ775EB+uXFMYCoRE1LmZdlnXhOI9S3ljDuA==

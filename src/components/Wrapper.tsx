@@ -5,7 +5,7 @@ import { KeyboardTracker } from './KeyboardTracker'
 import { LayoutContext } from './LayoutContext'
 
 interface Props {
-  children: React.ReactNode
+  children?: React.ReactNode
   statusBarTranslucent?: boolean
   avoidAndroidKeyboard?: boolean
 }
