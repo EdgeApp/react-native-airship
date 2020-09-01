@@ -1,8 +1,8 @@
 import * as React from 'react'
 import { Animated, Text, TextStyle, ViewStyle } from 'react-native'
 
-import { AirshipBridge } from '../Airship'
-import { unpackEdges } from '../utils'
+import { AirshipBridge } from '../types'
+import { unpackEdges } from '../util/edges'
 
 export interface AirshipToastProps {
   bridge: AirshipBridge<undefined>

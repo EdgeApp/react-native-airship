@@ -6,8 +6,8 @@ import {
   ViewStyle
 } from 'react-native'
 
-import { AirshipBridge } from '../Airship'
-import { unpackEdges } from '../utils'
+import { AirshipBridge } from '../types'
+import { unpackEdges } from '../util/edges'
 
 export interface AirshipDropdownProps {
   bridge: AirshipBridge<undefined>

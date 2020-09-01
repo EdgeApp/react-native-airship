@@ -5,6 +5,10 @@ interface Edges {
   top: number
 }
 
+/**
+ * Interprets an array of numbers as a list of 0-4 numbers as a
+ * web CSS `[top, right, bottom, left]` shorthand.
+ */
 export function unpackEdges(edges: number | number[] = 0): Edges {
   const array = typeof edges === 'number' ? [edges] : edges
   const top = array[0] != null ? array[0] : 0
