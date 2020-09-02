@@ -10,7 +10,7 @@ import {
 import { AirshipBridge } from '../types'
 import { unpackEdges } from '../util/edges'
 
-export interface AirshipModalProps<T = unknown> {
+export interface AirshipModalProps<T> {
   bridge: AirshipBridge<T>
   children?: React.ReactNode
 

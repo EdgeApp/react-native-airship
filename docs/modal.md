@@ -39,7 +39,7 @@ Although this example lacks pretty styling, it is completely functional. See [Ai
 Here are the properties the component accepts. Only the `bridge` and `onCancel` properties are mandatory.
 
 ```typescript
-export interface AirshipModalProps<T = unknown> {
+export interface AirshipModalProps<T> {
   bridge: AirshipBridge<T>
   children?: React.ReactNode
 

@@ -11,22 +11,22 @@ export interface AirshipEvents {
  */
 export interface AirshipBridge<T> {
   // Use these to pass values to the outside world:
-  resolve: (value: T | PromiseLike<T>) => void
-  reject: (error: Error) => void
+  readonly resolve: (value: T | PromiseLike<T>) => void
+  readonly reject: (error: Error) => void
 
   // Unmounts the component:
-  remove: () => void
+  readonly remove: () => void
 
   // Subscribes to events.
   // Use `on('result', callback)` to subscribe to
   // the promise being resolved or rejected.
   // Use `on('clear', callback)` to subscribe to
   // the `Airship.clear` method being called.
-  on: OnEvents<AirshipEvents>
+  readonly on: OnEvents<AirshipEvents>
 
   // Runs a callback when the result promise settles.
   // Deprecated in favor of `on('result')`.
-  onResult: (callback: () => unknown) => void
+  readonly onResult: (callback: () => unknown) => void
 }
 
 /**
