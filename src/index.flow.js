@@ -1,7 +1,6 @@
 // @flow
 
 import * as React from 'react'
-import { type ViewStyle } from 'react-native'
 
 /**
  * Control panel for managing a component inside an airship.
@@ -45,6 +44,15 @@ declare export class Airship extends React.Component<Props> {
  */
 declare export function makeAirship(): typeof Airship
 
+type FlexDirection = 'column-reverse' | 'column' | 'row-reverse' | 'row'
+type JustifyContent =
+  | 'center'
+  | 'flex-end'
+  | 'flex-start'
+  | 'space-around'
+  | 'space-between'
+  | 'space-evenly'
+
 /**
  * A drop-down alert.
  */
@@ -56,8 +64,8 @@ export type AirshipDropdownProps = {
   autoHideMs?: number,
   backgroundColor?: string,
   borderRadius?: number,
-  flexDirection?: $PropertyType<ViewStyle, 'flexDirection'>,
-  justifyContent?: $PropertyType<ViewStyle, 'justifyContent'>,
+  flexDirection?: FlexDirection,
+  justifyContent?: JustifyContent,
   margin?: number | number[],
   maxHeight?: number,
   maxWidth?: number,
@@ -78,8 +86,8 @@ export type AirshipModalProps<T = mixed> = {
 
   backgroundColor?: string,
   borderRadius?: number,
-  flexDirection?: $PropertyType<ViewStyle, 'flexDirection'>,
-  justifyContent?: $PropertyType<ViewStyle, 'justifyContent'>,
+  flexDirection?: FlexDirection,
+  justifyContent?: JustifyContent,
   margin?: number | number[],
   maxHeight?: number,
   maxWidth?: number,
