@@ -26,11 +26,7 @@ export type AirshipBridge<T> = {
   // the promise being resolved or rejected.
   // Use `on('clear', callback)` to subscribe to
   // the `Airship.clear` method being called.
-  +on: OnEvents<AirshipEvents>,
-
-  // Runs a callback when the result promise settles.
-  // Deprecated in favor of `on('result')`.
-  +onResult: (callback: () => mixed) => void
+  +on: OnEvents<AirshipEvents>
 }
 
 /**

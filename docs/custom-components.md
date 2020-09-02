@@ -38,8 +38,6 @@ A typical use-case is to use `bridge.on('result')` to start some sort of fade-ou
 
 It is also a good idea to set up a `bridge.on('clear')` callback, so your component can remove itself when somebody calls `Airship.clear`.
 
-The bridge also has a deprecated `onResult` method, which is equivalent to calling `on('result')`. Do not use `onResult` method; it will go away in the next breaking release.
-
 ## Layout
 
 The `Airship` component mounts its children inside a wrapper component. This wrapper component fills the entire screen, and uses padding to avoid the status bar, keyboard, notches, and other obstacles.

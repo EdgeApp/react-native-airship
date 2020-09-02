@@ -63,13 +63,7 @@ export function makeAirship(): Airship {
     const [on, emit]: Events<AirshipEvents> = makeEvents()
     let bridge!: AirshipBridge<T>
     const promise: Promise<T> = new Promise((resolve, reject) => {
-      bridge = {
-        on,
-        onResult: callback => on('result', callback),
-        reject,
-        remove,
-        resolve
-      }
+      bridge = { on, reject, remove, resolve }
     })
 
     // Hook up events:

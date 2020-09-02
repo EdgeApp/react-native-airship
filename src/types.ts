@@ -23,10 +23,6 @@ export interface AirshipBridge<T> {
   // Use `on('clear', callback)` to subscribe to
   // the `Airship.clear` method being called.
   readonly on: OnEvents<AirshipEvents>
-
-  // Runs a callback when the result promise settles.
-  // Deprecated in favor of `on('result')`.
-  readonly onResult: (callback: () => unknown) => void
 }
 
 /**
