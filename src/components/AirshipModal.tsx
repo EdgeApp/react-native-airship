@@ -7,8 +7,8 @@ import {
   ViewStyle
 } from 'react-native'
 
-import { AirshipBridge } from '../Airship'
-import { unpackEdges } from '../utils'
+import { AirshipBridge } from '../types'
+import { unpackEdges } from '../util/edges'
 
 export interface AirshipModalProps<T = unknown> {
   bridge: AirshipBridge<T>
@@ -69,7 +69,7 @@ const safeAreaGap = 64
  * A modal that slides a modal up from the bottom of the screen
  * and dims the rest of the app.
  */
-export function AirshipModal(props: AirshipModalProps): JSX.Element {
+export function AirshipModal<T>(props: AirshipModalProps<T>): JSX.Element {
   const {
     bridge,
     children,
@@ -87,6 +87,7 @@ export function AirshipModal(props: AirshipModalProps): JSX.Element {
   } = props
   const margin = unpackEdges(props.margin)
   const padding = unpackEdges(props.padding)
+  React.useEffect(() => bridge.on('clear', onCancel), [onCancel])
 
   // Create the animations:
   const offset = React.useRef(
@@ -109,7 +110,7 @@ export function AirshipModal(props: AirshipModalProps): JSX.Element {
     ]).start()
 
     // Animate out:
-    bridge.onResult(() =>
+    bridge.on('result', () => {
       Animated.parallel([
         Animated.timing(opacity, {
           toValue: 0,
@@ -121,8 +122,8 @@ export function AirshipModal(props: AirshipModalProps): JSX.Element {
           duration: slideOutMs,
           useNativeDriver: true
         })
-      ]).start(props.bridge.remove)
-    )
+      ]).start(bridge.remove)
+    })
   }, [])
 
   // Set up the back-button handler:

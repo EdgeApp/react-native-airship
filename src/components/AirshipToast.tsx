@@ -1,8 +1,8 @@
 import * as React from 'react'
 import { Animated, Text, TextStyle, ViewStyle } from 'react-native'
 
-import { AirshipBridge } from '../Airship'
-import { unpackEdges } from '../utils'
+import { AirshipBridge } from '../types'
+import { unpackEdges } from '../util/edges'
 
 export interface AirshipToastProps {
   bridge: AirshipBridge<undefined>
@@ -93,7 +93,8 @@ export function AirshipToast(props: AirshipToastProps): JSX.Element {
     })
 
     // Animate out:
-    bridge.onResult(() => {
+    bridge.on('clear', () => bridge.resolve(undefined))
+    bridge.on('result', () => {
       Animated.timing(opacity, {
         toValue: 0,
         duration: fadeOutMs,

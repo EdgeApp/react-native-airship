@@ -56,6 +56,8 @@ import { Airship } from './your-app.js'
 Airship.show(bridge => <AirshipToast bridge={bridge} message="Hey!" />)
 ```
 
+There is also an `Airship.clear` method that can quickly remove everything mounted on the Airship (useful when logging out, for instance).
+
 The top-level `Airship` component may need two additional properties on Android. If you have set your status bar to translucent, set the `statusBarTranslucent` property on the Airship to continue avoiding the top of the screen. Similarly, if you have changed `android:windowSoftInputMode` to `adjustPan` in your AndroidManifest.xml, you can use the Airship `avoidAndroidKeyboard` property to bring back the original keyboard-avoiding behavior (although this is optional - the Android OS provides reasonable default behavior without it).
 
 ## Demo

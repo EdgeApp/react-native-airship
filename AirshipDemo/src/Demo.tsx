@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-floating-promises */
-
 import * as React from 'react'
 import {
   Appearance,
@@ -36,33 +34,10 @@ export const Demo = (props: {}): JSX.Element => {
 
   // Theming:
   const theme = dark ? darkTheme : lightTheme
-  React.useEffect(() => {
-    changeTheme(theme)
-  }, [theme])
+  React.useEffect(() => changeTheme(theme), [theme])
   const styles = getStyles(theme)
   const marginTop =
     translucent && StatusBar.currentHeight != null ? StatusBar.currentHeight : 0
-
-  // Callbacks for demo components:
-  function handleModal(): void {
-    Airship.show(bridge => <TextInputModal bridge={bridge} />)
-  }
-  function handleCenterModal(): void {
-    Airship.show(bridge => <TextInputModal bridge={bridge} center />)
-  }
-  function handleDropdown(): void {
-    Airship.show(bridge => (
-      <ThemedDropdown bridge={bridge}>Alert: This is a dropdown</ThemedDropdown>
-    ))
-  }
-  function handleToast(): void {
-    Airship.show(bridge => (
-      <ThemedToast bridge={bridge} message="Toast is happening..." />
-    ))
-  }
-  function handleCustom(): void {
-    Airship.show(bridge => <CustomFloatingComponent bridge={bridge} />)
-  }
 
   return (
     <ThemeProvider>
@@ -83,11 +58,12 @@ export const Demo = (props: {}): JSX.Element => {
             </ThemedText>
             <ThemedButton onPress={handleModal}>Modal</ThemedButton>
             <ThemedButton onPress={handleCenterModal}>
-              Centered Modal
+              Centered modal
             </ThemedButton>
             <ThemedButton onPress={handleDropdown}>Dropdown</ThemedButton>
             <ThemedButton onPress={handleToast}>Toast</ThemedButton>
-            <ThemedButton onPress={handleCustom}>Custom Component</ThemedButton>
+            <ThemedButton onPress={handleCustom}>Custom component</ThemedButton>
+            <ThemedButton onPress={handleClear}>Clear all</ThemedButton>
             <View style={styles.row}>
               <ThemedText>Dark mode</ThemedText>
               <Switch
@@ -130,3 +106,43 @@ const getStyles = cacheStyles((theme: Theme) => ({
     justifyContent: 'space-between'
   }
 }))
+
+// Callbacks for demo components:
+
+function handleModal(): void {
+  Airship.show(bridge => {
+    return <TextInputModal bridge={bridge} />
+  }).catch(ignoreError)
+}
+
+function handleCenterModal(): void {
+  Airship.show(bridge => {
+    return <TextInputModal bridge={bridge} center />
+  }).catch(ignoreError)
+}
+
+function handleDropdown(): void {
+  Airship.show(bridge => {
+    return (
+      <ThemedDropdown bridge={bridge}>Alert: This is a dropdown</ThemedDropdown>
+    )
+  }).catch(ignoreError)
+}
+
+function handleToast(): void {
+  Airship.show(bridge => {
+    return <ThemedToast bridge={bridge} message="Toast is happening..." />
+  }).catch(ignoreError)
+}
+
+function handleCustom(): void {
+  Airship.show(bridge => {
+    return <CustomFloatingComponent bridge={bridge} />
+  }).catch(ignoreError)
+}
+
+function handleClear(): void {
+  Airship.clear()
+}
+
+const ignoreError = (): void => undefined
