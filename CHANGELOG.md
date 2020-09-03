@@ -1,5 +1,13 @@
 # react-native-airship
 
+## 0.2.2
+
+- feature: Add an `Airship.clear` method, which calls any callbacks registered with `bridge.on('clear')`.
+- feature: Add a `bridge.on('result')` method to replace `bridge.onResult`.
+- fix: Add some missing Flow type defitions.
+- fix: Make the Typescript definitions work better with strict mode.
+- deprecated: `bridge.onResult`
+
 ## 0.2.1
 
 - Fix various Flow & documentation issues from the previous release.
