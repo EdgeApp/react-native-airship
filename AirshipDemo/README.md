@@ -4,7 +4,7 @@ This app shows off the react-native-airship built-in components.
 
 To launch the demo, first run `yarn install` in this folder to set up the dependences, and then run either `yarn android` or `yarn ios`.
 
-If you want to edit the Airship library while using this demo, run the `copy-airship.sh` script located in this folder to copy your changes into `node_modules`.
+If you want to edit the Airship library while using this demo, run the `update-demo.sh` script located in the outer folder to copy your changes into `node_modules`.
 
 ## Theming
 
