@@ -115,6 +115,7 @@ export function AirshipDropdown(props: AirshipDropdownProps): JSX.Element {
     return () => {
       if (timeout != null) clearTimeout(timeout)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const bodyStyle: ViewStyle = {

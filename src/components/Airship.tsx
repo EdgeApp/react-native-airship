@@ -25,7 +25,7 @@ export function makeAirship(): Airship {
   let guests: Guest[] = []
   let nextKey: number = 0
 
-  const AirshipHost: React.FunctionComponent<AirshipProps> = props => {
+  const AirshipHost = (props: AirshipProps): JSX.Element => {
     const { children, avoidAndroidKeyboard, statusBarTranslucent } = props
     const [ourGuests, setGuests] = React.useState(guests)
     React.useEffect(() => onGuestsChange(setGuests), [])
@@ -50,7 +50,7 @@ export function makeAirship(): Airship {
     emitClear(undefined)
   }
 
-  function show<T>(render: AirshipRender<T>): Promise<T> {
+  async function show<T>(render: AirshipRender<T>): Promise<T> {
     const key = `airship${nextKey++}`
 
     function remove(): void {

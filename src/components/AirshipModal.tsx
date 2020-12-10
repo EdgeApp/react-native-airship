@@ -87,7 +87,7 @@ export function AirshipModal<T>(props: AirshipModalProps<T>): JSX.Element {
   } = props
   const margin = unpackEdges(props.margin)
   const padding = unpackEdges(props.padding)
-  React.useEffect(() => bridge.on('clear', onCancel), [onCancel])
+  React.useEffect(() => bridge.on('clear', onCancel), [bridge, onCancel])
 
   // Create the animations:
   const offset = React.useRef(
@@ -124,6 +124,7 @@ export function AirshipModal<T>(props: AirshipModalProps<T>): JSX.Element {
         })
       ]).start(bridge.remove)
     })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   // Set up the back-button handler:
@@ -136,7 +137,7 @@ export function AirshipModal<T>(props: AirshipModalProps<T>): JSX.Element {
       }
     )
     return () => backHandler.remove()
-  }, [])
+  }, [onCancel])
 
   const underlayStyle: ViewStyle = {
     backgroundColor: typeof underlay === 'string' ? underlay : 'transparent',

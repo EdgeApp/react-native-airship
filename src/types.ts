@@ -2,8 +2,8 @@ import * as React from 'react'
 import { OnEvents } from 'yavent'
 
 export interface AirshipEvents {
-  result: void
-  clear: void
+  result: undefined
+  clear: undefined
 }
 
 /**
