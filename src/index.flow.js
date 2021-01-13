@@ -94,7 +94,8 @@ export type AirshipDropdownProps = {
   slideInMs?: number,
   slideOutMs?: number
 }
-declare export class AirshipDropdown extends React.Component<AirshipDropdownProps> {}
+declare export class AirshipDropdown
+  extends React.Component<AirshipDropdownProps> {}
 
 /**
  * A slide-up modal which dims the rest of the screen.
@@ -117,9 +118,8 @@ export type AirshipModalProps<T> = {
   slideOutMs?: number,
   underlay?: string | React.Element<any>
 }
-declare export class AirshipModal<T> extends React.Component<
-  AirshipModalProps<T>
-> {}
+declare export class AirshipModal<T>
+  extends React.Component<AirshipModalProps<T>> {}
 
 /**
  * Emulates the Android Toast component in a cross-platform way.

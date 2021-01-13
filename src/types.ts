@@ -2,8 +2,8 @@ import * as React from 'react'
 import { OnEvents } from 'yavent'
 
 export interface AirshipEvents {
-  result: void
-  clear: void
+  result: undefined
+  clear: undefined
 }
 
 /**
@@ -52,6 +52,6 @@ export interface AirshipProps {
  * to the outside world.
  */
 export interface Airship extends React.FunctionComponent<AirshipProps> {
-  clear(): void
-  show<T>(render: AirshipRender<T>): Promise<T>
+  clear: () => void
+  show: <T>(render: AirshipRender<T>) => Promise<T>
 }
