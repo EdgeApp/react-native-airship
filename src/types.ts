@@ -52,6 +52,6 @@ export interface AirshipProps {
  * to the outside world.
  */
 export interface Airship extends React.FunctionComponent<AirshipProps> {
-  clear(): void
-  show<T>(render: AirshipRender<T>): Promise<T>
+  clear: () => void
+  show: <T>(render: AirshipRender<T>) => Promise<T>
 }

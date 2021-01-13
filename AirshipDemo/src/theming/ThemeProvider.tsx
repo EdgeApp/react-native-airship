@@ -7,7 +7,7 @@ import { darkTheme, lightTheme } from './themes'
 setCacheSize(2)
 
 export interface Theme {
-  rem(size: number): number
+  rem: (size: number) => number
   background: string
   text: string
   header: string
