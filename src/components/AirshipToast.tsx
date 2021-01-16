@@ -2,7 +2,7 @@ import * as React from 'react'
 import { Animated, Text, TextStyle, ViewStyle } from 'react-native'
 
 import { AirshipBridge } from '../types'
-import { unpackEdges } from '../util/edges'
+import { fixSides, sidesToMargin, sidesToPadding } from '../util/sides'
 
 export interface AirshipToastProps {
   bridge: AirshipBridge<undefined>
@@ -69,8 +69,8 @@ export function AirshipToast(props: AirshipToastProps): JSX.Element {
     message,
     textColor = 'black'
   } = props
-  const margin = unpackEdges(props.margin ?? 2 * textSize)
-  const padding = unpackEdges(props.padding ?? textSize)
+  const margin = sidesToMargin(fixSides(props.margin, 2 * textSize))
+  const padding = sidesToPadding(fixSides(props.padding, textSize))
 
   // Create the animation:
   const opacity = React.useRef(new Animated.Value(0)).current
@@ -108,22 +108,16 @@ export function AirshipToast(props: AirshipToastProps): JSX.Element {
   })
 
   const bodyStyle: ViewStyle = {
+    ...margin,
+    ...padding,
     alignItems: 'center',
     alignSelf: 'flex-end',
     backgroundColor,
     borderRadius,
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    marginBottom: margin.bottom,
-    marginLeft: margin.left,
-    marginRight: margin.right,
-    marginTop: margin.top,
     maxWidth,
-    opacity: opacity as any,
-    paddingBottom: padding.bottom,
-    paddingLeft: padding.left,
-    paddingRight: padding.right,
-    paddingTop: padding.top
+    opacity: opacity as any
   }
 
   const textStyle: TextStyle = {

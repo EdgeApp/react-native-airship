@@ -8,7 +8,7 @@ import {
 } from 'react-native'
 
 import { AirshipBridge } from '../types'
-import { unpackEdges } from '../util/edges'
+import { fixSides, sidesToMargin, sidesToPadding } from '../util/sides'
 
 export interface AirshipModalProps<T = unknown> {
   bridge: AirshipBridge<T>
@@ -85,8 +85,8 @@ export function AirshipModal<T>(props: AirshipModalProps<T>): JSX.Element {
     slideOutMs = 300,
     underlay = 'rgba(0, 0, 0, 0.75)'
   } = props
-  const margin = unpackEdges(props.margin)
-  const padding = unpackEdges(props.padding)
+  const margin = sidesToMargin(fixSides(props.margin, 0))
+  const padding = sidesToPadding(fixSides(props.padding, 0))
   React.useEffect(() => bridge.on('clear', onCancel), [bridge, onCancel])
 
   // Create the animations:
@@ -150,20 +150,14 @@ export function AirshipModal<T>(props: AirshipModalProps<T>): JSX.Element {
   }
 
   const bodyCommon: ViewStyle = {
+    ...margin,
+    ...padding,
     alignSelf: center ? 'center' : 'flex-end',
     backgroundColor,
     flexDirection,
     flexShrink: 1,
     justifyContent,
-    marginBottom: margin.bottom,
-    marginLeft: margin.left,
-    marginRight: margin.right,
-    marginTop: margin.top,
     maxHeight,
-    paddingBottom: padding.bottom,
-    paddingLeft: padding.left,
-    paddingRight: padding.right,
-    paddingTop: padding.top,
     shadowOffset: { height: 0, width: 0 },
     shadowOpacity: 1,
     shadowRadius: 10,
@@ -180,7 +174,7 @@ export function AirshipModal<T>(props: AirshipModalProps<T>): JSX.Element {
         borderTopLeftRadius: borderRadius,
         borderTopRightRadius: borderRadius,
         marginBottom: -safeAreaGap,
-        paddingBottom: padding.bottom + safeAreaGap
+        paddingBottom: padding.paddingBottom + safeAreaGap
       }
 
   return (
