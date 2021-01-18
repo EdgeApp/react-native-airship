@@ -10,6 +10,13 @@ export interface Margin {
   marginTop: number
 }
 
+export interface Offset {
+  bottom: number
+  left: number
+  right: number
+  top: number
+}
+
 export interface Padding {
   paddingBottom: number
   paddingLeft: number
@@ -39,6 +46,21 @@ export function fixSides(
   return [top, right, bottom, left]
 }
 
+export function addSides(a: SideList, b: SideList): SideList {
+  return [a[0] + b[0], a[1] + b[1], a[2] + b[2], a[3] + b[3]]
+}
+
+export function subtractSides(a: SideList, b: SideList): SideList {
+  return [a[0] - b[0], a[1] - b[1], a[2] - b[2], a[3] - b[3]]
+}
+
+export function mapSides(
+  sides: SideList,
+  f: (side: number) => number
+): SideList {
+  return [f(sides[0]), f(sides[1]), f(sides[2]), f(sides[3])]
+}
+
 /**
  * Turns a list of sides into CSS margin properties.
  */
@@ -48,6 +70,18 @@ export function sidesToMargin(sides: SideList): Margin {
     marginRight: sides[1],
     marginBottom: sides[2],
     marginLeft: sides[3]
+  }
+}
+
+/**
+ * Turns a list of sides into CSS positioning properties.
+ */
+export function sidesToOffset(sides: SideList): Offset {
+  return {
+    top: sides[0],
+    right: sides[1],
+    bottom: sides[2],
+    left: sides[3]
   }
 }
 

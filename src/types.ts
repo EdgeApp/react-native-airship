@@ -39,8 +39,6 @@ export type AirshipRender<T> = (bridge: AirshipBridge<T>) => React.ReactNode
  */
 export interface AirshipProps {
   children?: React.ReactNode
-  avoidAndroidKeyboard?: boolean
-  statusBarTranslucent?: boolean
 }
 
 /**

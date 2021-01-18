@@ -38,7 +38,6 @@
     "*.{js,jsx,ts,tsx}": "eslint"
   },
   "dependencies": {
-    "react-native-safe-area-view": "^0.14.9",
     "yavent": "^0.1.1"
   },
   "devDependencies": {

@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { View } from 'react-native'
 import { Event, Events, makeEvent, makeEvents } from 'yavent'
 
 import {
@@ -8,11 +9,17 @@ import {
   AirshipProps,
   AirshipRender
 } from '../types'
-import { Wrapper } from './Wrapper'
+import { sidesToOffset, sidesToPadding } from '../util/sides'
+import { Barometer, BarometerLayout } from './Barometer'
 
 interface Guest {
   key: string
   element: React.ReactNode
+}
+
+const emptyLayout: BarometerLayout = {
+  offset: sidesToOffset([0, 0, 0, 0]),
+  padding: sidesToPadding([0, 0, 0, 0])
 }
 
 /**
@@ -26,21 +33,33 @@ export function makeAirship(): Airship {
   let nextKey: number = 0
 
   const AirshipHost = (props: AirshipProps): JSX.Element => {
-    const { children, avoidAndroidKeyboard, statusBarTranslucent } = props
+    const { children } = props
+
+    // Watch the common guest list:
     const [ourGuests, setGuests] = React.useState(guests)
     React.useEffect(() => onGuestsChange(setGuests), [])
 
+    // Track layout changes:
+    const [layout, setLayout] = React.useState(emptyLayout)
+
     return (
       <>
+        <Barometer onLayout={setLayout} />
         {children}
         {ourGuests.map(guest => (
-          <Wrapper
+          <View
             key={guest.key}
-            avoidAndroidKeyboard={avoidAndroidKeyboard}
-            statusBarTranslucent={statusBarTranslucent}
+            pointerEvents="box-none"
+            style={{
+              ...layout.offset,
+              ...layout.padding,
+              flexDirection: 'row',
+              justifyContent: 'center',
+              position: 'absolute'
+            }}
           >
             {guest.element}
-          </Wrapper>
+          </View>
         ))}
       </>
     )
