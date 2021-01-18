@@ -4,7 +4,7 @@ The airship floats above your React Native application, providing a place for mo
 
 <img alt="Glass sheet hovering above phone" src="./docs/isometric.png" width="400" />
 
-To place an item on the airship, call the `Airship.show` method:
+Unlike React Native's built-in `Modal` component, the airship doesn't block the user from interacting with the application below. The airship has also a simple, promised-based API that lets it easily host multiple children at once. To place an item on the airship, call the `Airship.show` method:
 
 ```javascript
 const answer = await Airship.show(bridge => (
