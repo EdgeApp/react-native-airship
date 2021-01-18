@@ -14,5 +14,10 @@
   ],
   "rules": {
     "simple-import-sort/imports": "error"
+  },
+  "settings": {
+    "react": {
+      "version": "16.9"
+    }
   }
 }
