@@ -1,5 +1,11 @@
 # react-native-airship
 
+## 0.2.3
+
+- fix: Measure the screen by mounting a test component and seeing where it lands, avoiding the need for various properties to control the layout. If the status bar is translucent, or if they keyboard is `adjustPan` mode on Android, we can automatically determine that now and do the right thing.
+- removed: `avoidAndroidKeyboard` prop on the top-level `Airship`.
+- removed: `statusBarTranslucent` prop on the top-level `Airship`.
+
 ## 0.2.2
 
 - feature: Add an `Airship.clear` method, which calls any callbacks registered with `bridge.on('clear')`.
