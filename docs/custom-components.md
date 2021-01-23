@@ -76,34 +76,3 @@ return (
 ```
 
 This will touch all four edges of the screen, completely ignoring the safe area. This approach is great for capturing touches or applying darkening outside your main UI. On the other hand, it loses the safe area information, which makes it less useful if you have contents that need to remain readable.
-
-## Android Differences
-
-By default, React Native for Android automatically resizes its content area to avoid the keyboard and status bar. This means that the wrapper component won't have any padding, since the native code handles the obstacles instead. There are two ways to alter this behavior, however.
-
-### Android Status Bar
-
-Calling `StatusBar.setTranslucent()` or rendering a `<StatusBar translucent />` component on Android will allow the content area to reach up underneath the status bar. Once this happens, the application needs to avoid the status bar manually. The good news is that `Airship` knows how to do this, but the bad news is that React Native doesn't have a way to determine the current translucency state. Instead, `Airship` needs a `statusBarTranslucent` prop to enable this mode:
-
-```javascript
-return (
-  <Airship statusBarTranslucent>
-    <StatusBar translucent />
-    {...restOfApp}
-  </Airship>
-)
-```
-
-With this in place, the Android status bar will work more like the iOS one.
-
-### Android Keyboard
-
-Another way to change Android's behavior is to go into AndroidManifest.xml and change `android:windowSoftInputMode="adjustResize"` to `android:windowSoftInputMode="adjustPan"`. This will prevent the React Native content area from resizing when the keyboard appears.
-
-If you have this mode enabled, and would like Airship to respond to keyboard events in the same way as it does on iOS, pass the `avoidAndroidKeyboard` property:
-
-```javascript
-return <Airship avoidAndroidKeyboard>{...restOfApp}</Airship>
-```
-
-This is not a good idea, though, since the Android OS might decide to slide the entire app vertically to keep the cursor in view. Once the Airship makes its layout adjustments, the entire app will slide back, since the keyboard no longer covers the input. This bounce looks terrible, and the only way to avoid it is to carefully place text inputs in locations where the keyboard can't cover them. Some apps work this way, however, so Airship supports this feature.

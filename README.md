@@ -4,7 +4,7 @@ The airship floats above your React Native application, providing a place for mo
 
 <img alt="Glass sheet hovering above phone" src="./docs/isometric.png" width="400" />
 
-To place an item on the airship, call the `Airship.show` method:
+Unlike React Native's built-in `Modal` component, the airship doesn't block the user from interacting with the application below. The airship has also a simple, promised-based API that lets it easily host multiple children at once. To place an item on the airship, call the `Airship.show` method:
 
 ```javascript
 const answer = await Airship.show(bridge => (
@@ -57,8 +57,6 @@ Airship.show(bridge => <AirshipToast bridge={bridge} message="Hey!" />)
 ```
 
 There is also an `Airship.clear` method that can quickly remove everything mounted on the Airship (useful when logging out, for instance).
-
-The top-level `Airship` component may need two additional properties on Android. If you have set your status bar to translucent, set the `statusBarTranslucent` property on the Airship to continue avoiding the top of the screen. Similarly, if you have changed `android:windowSoftInputMode` to `adjustPan` in your AndroidManifest.xml, you can use the Airship `avoidAndroidKeyboard` property to bring back the original keyboard-avoiding behavior (although this is optional - the Android OS provides reasonable default behavior without it).
 
 ## Demo
 

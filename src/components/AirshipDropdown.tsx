@@ -7,7 +7,7 @@ import {
 } from 'react-native'
 
 import { AirshipBridge } from '../types'
-import { unpackEdges } from '../util/edges'
+import { fixSides, sidesToMargin, sidesToPadding } from '../util/sides'
 
 export interface AirshipDropdownProps {
   bridge: AirshipBridge<undefined>
@@ -78,9 +78,11 @@ export function AirshipDropdown(props: AirshipDropdownProps): JSX.Element {
     slideInMs = 300,
     slideOutMs = 500
   } = props
-  const margin = unpackEdges(props.margin)
-  const padding = unpackEdges(props.padding)
-  const hiddenOffset = -(maxHeight + margin.bottom)
+  const margin = sidesToMargin(fixSides(props.margin, 0))
+  const padding = sidesToPadding(fixSides(props.padding, 0))
+  const hiddenOffset = -(maxHeight + margin.marginBottom)
+  margin.marginTop = -safeAreaGap
+  padding.paddingTop += safeAreaGap
 
   // Create the animation:
   const offset = React.useRef(new Animated.Value(hiddenOffset)).current
@@ -119,6 +121,8 @@ export function AirshipDropdown(props: AirshipDropdownProps): JSX.Element {
   }, [])
 
   const bodyStyle: ViewStyle = {
+    ...margin,
+    ...padding,
     alignSelf: 'flex-start',
     backgroundColor,
     borderBottomLeftRadius: borderRadius,
@@ -126,15 +130,7 @@ export function AirshipDropdown(props: AirshipDropdownProps): JSX.Element {
     flexDirection,
     flexShrink: 1,
     justifyContent,
-    marginBottom: margin.bottom,
-    marginLeft: margin.left,
-    marginRight: margin.right,
-    marginTop: -safeAreaGap,
     maxHeight,
-    paddingBottom: padding.bottom,
-    paddingLeft: padding.left,
-    paddingRight: padding.right,
-    paddingTop: padding.top + safeAreaGap,
     shadowOffset: { height: 0, width: 0 },
     shadowOpacity: 1,
     shadowRadius: 4,
