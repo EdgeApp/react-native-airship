@@ -65,8 +65,12 @@ export function makeAirship(): Airship {
     )
   }
 
+  let clearing = false
   function clear(): void {
+    if (clearing) return
+    clearing = true
     emitClear(undefined)
+    clearing = false
   }
 
   async function show<T>(render: AirshipRender<T>): Promise<T> {
