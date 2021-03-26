@@ -1,5 +1,9 @@
 # react-native-airship
 
+## 0.2.4
+
+- fix: Do not crash when calling `Airship.clear` recursively.
+
 ## 0.2.3
 
 - fix: Measure the screen by mounting a test component and seeing where it lands, avoiding the need for various properties to control the layout. If the status bar is translucent, or if they keyboard is `adjustPan` mode on Android, we can automatically determine that now and do the right thing.
