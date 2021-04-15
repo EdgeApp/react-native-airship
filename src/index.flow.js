@@ -53,15 +53,17 @@ export interface AirshipProps {
  * The method returns a promise, which the component can use to pass values
  * to the outside world.
  */
-declare export class Airship extends React.Component<AirshipProps> {
+declare class AirshipClass extends React.Component<AirshipProps> {
   static clear(): void;
   static show<T>(render: AirshipRender<T>): Promise<T>;
 }
 
+export type Airship = typeof AirshipClass
+
 /**
  * Constructs an Airship component.
  */
-declare export function makeAirship(): typeof Airship
+declare export function makeAirship(): Airship
 
 type FlexDirection = 'column-reverse' | 'column' | 'row-reverse' | 'row'
 type JustifyContent =
