@@ -1,5 +1,9 @@
 # react-native-airship
 
+## 0.2.5
+
+- fix: Make the Flow `Airship` type work like the Typescript version.
+
 ## 0.2.4
 
 - fix: Do not crash when calling `Airship.clear` recursively.
