@@ -41,7 +41,7 @@ export const Demo = (props: {}): JSX.Element => {
 
   return (
     <ThemeProvider>
-      <Airship statusBarTranslucent={translucent}>
+      <Airship>
         <StatusBar
           backgroundColor="#00000000"
           barStyle={dark && translucent ? 'light-content' : 'dark-content'}

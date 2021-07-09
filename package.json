@@ -12,22 +12,21 @@
   "repository": "git@github.com:EdgeApp/react-native-airship",
   "license": "MIT",
   "author": "William Swanson <swansontec@gmail.com>",
-  "main": "lib/src/index.js",
-  "types": "lib/src/index.d.ts",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "files": [
     "/CHANGELOG.md",
     "/lib/*",
     "/package.json",
-    "/README.md",
-    "/src/*"
+    "/README.md"
   ],
   "scripts": {
     "build.flow": "flow",
-    "build.lib": "tsc && cp src/index.flow.js lib/src/index.js.flow && rimraf lib/AirshipDemo",
+    "build.lib": "tsc && cp src/index.flow.js lib/index.js.flow",
     "clean": "rimraf lib",
     "fix": "npm run lint -- --fix",
     "lint": "eslint .",
-    "precommit": "lint-staged && run-p build.*",
+    "precommit": "lint-staged && run-p build.* && (cd AirshipDemo; tsc)",
     "prepare": "husky install && npm-run-all clean -p build.*"
   },
   "lint-staged": {

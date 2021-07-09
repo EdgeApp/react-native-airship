@@ -1,0 +1,5 @@
+{
+  "parserOptions": {
+    "project": "AirshipDemo/tsconfig.json"
+  }
+}
