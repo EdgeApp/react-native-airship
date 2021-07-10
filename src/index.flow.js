@@ -114,6 +114,9 @@ export type AirshipModalProps<T> = {
   maxHeight?: number,
   maxWidth?: number,
   padding?: number | number[],
+  shadowOffset?: { height: number, width: number },
+  shadowOpacity?: number,
+  shadowRadius?: number,
   slideInMs?: number,
   slideOutMs?: number,
   underlay?: string | React.Element<any>
