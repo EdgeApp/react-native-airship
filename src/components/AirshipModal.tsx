@@ -61,6 +61,11 @@ export interface AirshipModalProps<T = unknown> {
   // or a React element for a custom background.
   // Defaults to rgba(0, 0, 0, 0.75).
   underlay?: string | React.ReactElement
+
+  // shadow offset properties
+  shadowOffset?: { height: number; width: number }
+  shadowOpacity?: number
+  shadowRadius?: number
 }
 
 const safeAreaGap = 64
@@ -83,7 +88,10 @@ export function AirshipModal<T>(props: AirshipModalProps<T>): JSX.Element {
     maxWidth = 512,
     slideInMs = 300,
     slideOutMs = 300,
-    underlay = 'rgba(0, 0, 0, 0.75)'
+    underlay = 'rgba(0, 0, 0, 0.75)',
+    shadowOffset = { height: 0, width: 0 },
+    shadowOpacity = 1,
+    shadowRadius = 10
   } = props
   const margin = sidesToMargin(fixSides(props.margin, 0))
   const padding = sidesToPadding(fixSides(props.padding, 0))
@@ -158,9 +166,9 @@ export function AirshipModal<T>(props: AirshipModalProps<T>): JSX.Element {
     flexShrink: 1,
     justifyContent,
     maxHeight,
-    shadowOffset: { height: 0, width: 0 },
-    shadowOpacity: 1,
-    shadowRadius: 10,
+    shadowOffset,
+    shadowOpacity,
+    shadowRadius,
     transform: [{ translateY: offset as any }],
     width: maxWidth // This works because flexShrink is set
   }
