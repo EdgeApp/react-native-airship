@@ -130,7 +130,6 @@ export function Barometer(props: Props): JSX.Element {
         event.endCoordinates.height
       )
       if (event.duration > 0) {
-        // @ts-expect-error
         Keyboard.scheduleLayoutAnimation(event)
       }
       handleLayout()

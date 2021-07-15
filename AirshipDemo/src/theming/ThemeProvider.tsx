@@ -30,11 +30,7 @@ export interface ThemeProps {
   theme: Theme
 }
 
-export const {
-  changeTheme,
-  ThemeProvider,
-  useTheme,
-  withTheme
-} = makeThemeContext(
-  Appearance.getColorScheme() === 'dark' ? darkTheme : lightTheme
-)
+export const { changeTheme, ThemeProvider, useTheme, withTheme } =
+  makeThemeContext(
+    Appearance.getColorScheme() === 'dark' ? darkTheme : lightTheme
+  )
