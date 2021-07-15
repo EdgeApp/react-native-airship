@@ -51,6 +51,15 @@ export interface AirshipModalProps<T = unknown> {
   // using the same logic as the web `padding` property. Defaults to 0.
   padding?: number | number[]
 
+  // The offset for the drop shadow on iOS. Defaults to 0.
+  shadowOffset?: { height: number; width: number }
+
+  // The opacity of the drop shadow on iOS. Defaults to 1.
+  shadowOpacity?: number
+
+  // The blur radius of the drop shadow on iOS. Defaults to 10.
+  shadowRadius?: number
+
   // How long the entry animation should be. Defaults to 300ms.
   slideInMs?: number
 
@@ -81,6 +90,9 @@ export function AirshipModal<T>(props: AirshipModalProps<T>): JSX.Element {
     justifyContent,
     maxHeight,
     maxWidth = 512,
+    shadowOffset = { height: 0, width: 0 },
+    shadowOpacity = 1,
+    shadowRadius = 10,
     slideInMs = 300,
     slideOutMs = 300,
     underlay = 'rgba(0, 0, 0, 0.75)'
@@ -158,9 +170,9 @@ export function AirshipModal<T>(props: AirshipModalProps<T>): JSX.Element {
     flexShrink: 1,
     justifyContent,
     maxHeight,
-    shadowOffset: { height: 0, width: 0 },
-    shadowOpacity: 1,
-    shadowRadius: 10,
+    shadowOffset,
+    shadowOpacity,
+    shadowRadius,
     transform: [{ translateY: offset as any }],
     width: maxWidth // This works because flexShrink is set
   }

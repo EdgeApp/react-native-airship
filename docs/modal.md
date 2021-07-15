@@ -80,6 +80,15 @@ export interface AirshipModalProps<T = unknown> {
   // using the same logic as the web `padding` property. Defaults to 0.
   padding?: number | number[]
 
+  // The offset for the drop shadow on iOS. Defaults to 0.
+  shadowOffset?: { height: number; width: number }
+
+  // The opacity of the drop shadow on iOS. Defaults to 1.
+  shadowOpacity?: number
+
+  // The blur radius of the drop shadow on iOS. Defaults to 10.
+  shadowRadius?: number
+
   // How long the entry animation should be. Defaults to 300ms.
   slideInMs?: number
 
