@@ -1,32 +1,39 @@
 # react-native-airship
 
-## 0.2.5
+## 0.2.6 (2021-07-15)
 
-- fix: Make the Flow `Airship` type work like the Typescript version.
+- feature: Add optional shadow properties to the `AirshipModal`:
+  - `shadowOffset`
+  - `shadowOpacity`
+  - `shadowRadius`
 
-## 0.2.4
+## 0.2.5 (2021-04-15)
+
+- fix: Make the `Airship` Flow type work like the Typescript version.
+
+## 0.2.4 (2021-03-25)
 
 - fix: Do not crash when calling `Airship.clear` recursively.
 
-## 0.2.3
+## 0.2.3 (2021-01-23)
 
 - fix: Measure the screen by mounting a test component and seeing where it lands, avoiding the need for various properties to control the layout. If the status bar is translucent, or if they keyboard is `adjustPan` mode on Android, we can automatically determine that now and do the right thing.
 - removed: `avoidAndroidKeyboard` prop on the top-level `Airship`.
 - removed: `statusBarTranslucent` prop on the top-level `Airship`.
 
-## 0.2.2
+## 0.2.2 (2020-09-03)
 
 - feature: Add an `Airship.clear` method, which calls any callbacks registered with `bridge.on('clear')`.
 - feature: Add a `bridge.on('result')` method to replace `bridge.onResult`.
-- fix: Add some missing Flow type defitions.
+- fix: Add some missing Flow type definitions.
 - fix: Make the Typescript definitions work better with strict mode.
 - deprecated: `bridge.onResult`
 
-## 0.2.1
+## 0.2.1 (2020-08-11)
 
 - Fix various Flow & documentation issues from the previous release.
 
-## 0.2.0
+## 0.2.0(2020-08-07)
 
 With this version, the demo components become an official part of the library. The old `react-native-airship/demos` entry point has gone away, so you can import `AirshipDropdown`, `AirshipModal`, and `AirshipToast` directly from `react-native-airship` now.
 
