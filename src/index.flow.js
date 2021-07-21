@@ -46,7 +46,7 @@ export interface AirshipProps {
 }
 
 /**
- * The airship itself is a component you should mount after your main
+ * The airship itself is a component you should mount around your main
  * scene or router.
  *
  * It has a static method anyone can call to display components.

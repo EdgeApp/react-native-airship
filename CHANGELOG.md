@@ -1,5 +1,11 @@
 # react-native-airship
 
+## 0.2.7 (2021-07-29)
+
+### Added
+
+- New optional `overflow` prop for `AirshipModal`.
+
 ## 0.2.6 (2021-07-15)
 
 - feature: Add optional shadow properties to the `AirshipModal`:
