@@ -46,6 +46,10 @@ export interface AirshipModalProps<T = unknown> {
   // Defaults to 512.
   maxWidth?: number
 
+  // Behavior for components that overflow the modal.
+  // Defaults to 'visible'.
+  overflow?: 'visible' | 'scroll' | 'hidden'
+
   // Internal padding to place inside the component.
   // Takes 0-4 numbers (top, right, bottom, left),
   // using the same logic as the web `padding` property. Defaults to 0.
@@ -90,6 +94,7 @@ export function AirshipModal<T>(props: AirshipModalProps<T>): JSX.Element {
     justifyContent,
     maxHeight,
     maxWidth = 512,
+    overflow = 'visible',
     shadowOffset = { height: 0, width: 0 },
     shadowOpacity = 1,
     shadowRadius = 10,
@@ -170,6 +175,7 @@ export function AirshipModal<T>(props: AirshipModalProps<T>): JSX.Element {
     flexShrink: 1,
     justifyContent,
     maxHeight,
+    overflow,
     shadowOffset,
     shadowOpacity,
     shadowRadius,

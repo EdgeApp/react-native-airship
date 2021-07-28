@@ -113,6 +113,7 @@ export type AirshipModalProps<T> = {
   margin?: number | number[],
   maxHeight?: number,
   maxWidth?: number,
+  overflow?: 'visible' | 'scroll' | 'hidden',
   padding?: number | number[],
   shadowOffset?: { height: number, width: number },
   shadowOpacity?: number,
