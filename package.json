@@ -36,8 +36,8 @@
     "yavent": "^0.1.1"
   },
   "devDependencies": {
-    "@types/react": "^17.0.14",
-    "@types/react-native": "^0.63.2",
+    "@types/react": "^17.0.43",
+    "@types/react-native": "^0.67.3",
     "@typescript-eslint/eslint-plugin": "^4.8.2",
     "@typescript-eslint/parser": "^4.8.2",
     "babel-eslint": "^10.1.0",

@@ -3,10 +3,12 @@
     "noEmit": true,
 
     "esModuleInterop": true,
-    "jsx": "react",
-    "lib": ["es2015"],
+    "isolatedModules": true,
+    "jsx": "react-native",
+    "lib": ["es2017"],
     "moduleResolution": "node",
     "target": "esnext",
+    "skipLibCheck": true,
 
     "strict": true
   }
