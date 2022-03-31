@@ -1,6 +1,7 @@
 import * as React from 'react'
 import {
   Dimensions,
+  EmitterSubscription,
   Keyboard,
   KeyboardEventListener,
   Platform,
@@ -134,20 +135,16 @@ export function Barometer(props: Props): JSX.Element {
       }
       handleLayout()
     }
+    const listeners: EmitterSubscription[] = []
     if (Platform.OS === 'android') {
-      Keyboard.addListener('keyboardDidShow', handleKeyboard)
-      Keyboard.addListener('keyboardDidHide', handleKeyboard)
+      listeners.push(Keyboard.addListener('keyboardDidShow', handleKeyboard))
+      listeners.push(Keyboard.addListener('keyboardDidHide', handleKeyboard))
     } else {
-      Keyboard.addListener('keyboardWillChangeFrame', handleKeyboard)
+      listeners.push(
+        Keyboard.addListener('keyboardWillChangeFrame', handleKeyboard)
+      )
     }
-    return () => {
-      if (Platform.OS === 'android') {
-        Keyboard.removeListener('keyboardDidShow', handleKeyboard)
-        Keyboard.removeListener('keyboardDidHide', handleKeyboard)
-      } else {
-        Keyboard.removeListener('keyboardWillChangeFrame', handleKeyboard)
-      }
-    }
+    return () => listeners.forEach(listener => listener.remove())
   }, [handleLayout])
 
   if (Platform.OS === 'android') {
