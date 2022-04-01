@@ -1,5 +1,9 @@
 # react-native-airship
 
+## 0.2.8 (2022-04-01)
+
+- fixed: Replace deprecated `removeListener` calls.
+
 ## 0.2.7 (2021-07-29)
 
 - added: New optional `overflow` prop for `AirshipModal`.
