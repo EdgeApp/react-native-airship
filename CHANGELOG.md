@@ -2,37 +2,35 @@
 
 ## 0.2.7 (2021-07-29)
 
-### Added
-
-- New optional `overflow` prop for `AirshipModal`.
+- added: New optional `overflow` prop for `AirshipModal`.
 
 ## 0.2.6 (2021-07-15)
 
-- feature: Add optional shadow properties to the `AirshipModal`:
+- added: Add optional shadow properties to the `AirshipModal`:
   - `shadowOffset`
   - `shadowOpacity`
   - `shadowRadius`
 
 ## 0.2.5 (2021-04-15)
 
-- fix: Make the `Airship` Flow type work like the Typescript version.
+- fixed: Make the `Airship` Flow type work like the Typescript version.
 
 ## 0.2.4 (2021-03-25)
 
-- fix: Do not crash when calling `Airship.clear` recursively.
+- fixed: Do not crash when calling `Airship.clear` recursively.
 
 ## 0.2.3 (2021-01-23)
 
-- fix: Measure the screen by mounting a test component and seeing where it lands, avoiding the need for various properties to control the layout. If the status bar is translucent, or if they keyboard is `adjustPan` mode on Android, we can automatically determine that now and do the right thing.
+- fixed: Measure the screen by mounting a test component and seeing where it lands, avoiding the need for various properties to control the layout. If the status bar is translucent, or if they keyboard is `adjustPan` mode on Android, we can automatically determine that now and do the right thing.
 - removed: `avoidAndroidKeyboard` prop on the top-level `Airship`.
 - removed: `statusBarTranslucent` prop on the top-level `Airship`.
 
 ## 0.2.2 (2020-09-03)
 
-- feature: Add an `Airship.clear` method, which calls any callbacks registered with `bridge.on('clear')`.
-- feature: Add a `bridge.on('result')` method to replace `bridge.onResult`.
-- fix: Add some missing Flow type definitions.
-- fix: Make the Typescript definitions work better with strict mode.
+- added: Add an `Airship.clear` method, which calls any callbacks registered with `bridge.on('clear')`.
+- added: Add a `bridge.on('result')` method to replace `bridge.onResult`.
+- fixed: Add some missing Flow type definitions.
+- fixed: Make the Typescript definitions work better with strict mode.
 - deprecated: `bridge.onResult`
 
 ## 0.2.1 (2020-08-11)
