@@ -27,6 +27,12 @@ export interface AirshipModalProps<T = unknown> {
   // The radius to use on the corners. Defaults to 10.
   borderRadius?: number
 
+  // The color to use for the border. Defaults to undefined.
+  borderColor?: string
+
+  // Width (better known as thickness) of the border. Default to 0
+  borderWidth?: number
+
   // The flex direction for the contents.
   flexDirection?: ViewStyle['flexDirection']
 
@@ -89,6 +95,8 @@ export function AirshipModal<T>(props: AirshipModalProps<T>): JSX.Element {
     onCancel,
     backgroundColor = 'white',
     borderRadius = 10,
+    borderColor,
+    borderWidth = 0,
     center = false,
     flexDirection,
     justifyContent,
@@ -185,12 +193,16 @@ export function AirshipModal<T>(props: AirshipModalProps<T>): JSX.Element {
   const bodyStyle = center
     ? {
         ...bodyCommon,
-        borderRadius
+        borderRadius,
+        borderColor,
+        borderWidth
       }
     : {
         ...bodyCommon,
         borderTopLeftRadius: borderRadius,
         borderTopRightRadius: borderRadius,
+        borderColor,
+        borderWidth,
         marginBottom: -safeAreaGap,
         paddingBottom: padding.paddingBottom + safeAreaGap
       }
