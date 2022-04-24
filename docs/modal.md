@@ -56,6 +56,12 @@ export interface AirshipModalProps<T = unknown> {
   // The radius to use on the corners. Defaults to 10.
   borderRadius?: number
 
+  // The color to use for the border. Defaults to undefined.
+  borderColor?: string
+
+  // Width (better known as thickness) of the border. Default to 0
+  borderWidth?: number
+
   // The flex direction for the contents.
   flexDirection?: ViewStyle['flexDirection']
 

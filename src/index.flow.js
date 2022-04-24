@@ -108,6 +108,8 @@ export type AirshipModalProps<T> = {
 
   backgroundColor?: string,
   borderRadius?: number,
+  borderColor?: string,
+  borderWidth?: number,
   flexDirection?: FlexDirection,
   justifyContent?: JustifyContent,
   margin?: number | number[],
