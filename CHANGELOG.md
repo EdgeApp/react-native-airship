@@ -1,5 +1,9 @@
 # react-native-airship
 
+## 0.2.9 (2022-04-25)
+
+- added: Add `borderColor` and `borderWidth` props to the `AirshipModal` component.
+
 ## 0.2.8 (2022-04-01)
 
 - fixed: Replace deprecated `removeListener` calls.
