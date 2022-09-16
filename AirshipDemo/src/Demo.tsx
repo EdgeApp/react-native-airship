@@ -110,13 +110,13 @@ const getStyles = cacheStyles((theme: Theme) => ({
 // Callbacks for demo components:
 
 function handleModal(): void {
-  Airship.show(bridge => {
+  Airship.show<string | undefined>(bridge => {
     return <TextInputModal bridge={bridge} />
   }).catch(ignoreError)
 }
 
 function handleCenterModal(): void {
-  Airship.show(bridge => {
+  Airship.show<string | undefined>(bridge => {
     return <TextInputModal bridge={bridge} center />
   }).catch(ignoreError)
 }

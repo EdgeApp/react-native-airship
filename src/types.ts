@@ -51,5 +51,7 @@ export interface AirshipProps {
  */
 export interface Airship extends React.FunctionComponent<AirshipProps> {
   clear: () => void
-  show: <T>(render: AirshipRender<T>) => Promise<T>
+
+  // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
+  show: <T = void>(render: AirshipRender<T>) => Promise<T>
 }
