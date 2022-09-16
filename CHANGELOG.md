@@ -1,5 +1,9 @@
 # react-native-airship
 
+## 0.2.10 (2022-09-16)
+
+- changed: Default to Default to `AirshipBridge<void>` instead of `AirshipBridge<unknown>`. This change may cause new TypeScript errors to appear, but it is not a breaking change - the cases were always broken, but TypeScript simply wasn't reporting the errors.
+
 ## 0.2.9 (2022-04-25)
 
 - added: Add `borderColor` and `borderWidth` props to the `AirshipModal` component.
