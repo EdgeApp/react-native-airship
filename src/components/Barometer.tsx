@@ -116,6 +116,10 @@ export function Barometer(props: Props): JSX.Element {
             offset: sidesToOffset(offset),
             padding: sidesToPadding(padding)
           })
+
+          // Force a second trigger because React Native can fail to invoke
+          // onLayout for some edge cases.
+          setTimeout(handleLayout, 2000)
         }
       })
       .catch(() => {})
