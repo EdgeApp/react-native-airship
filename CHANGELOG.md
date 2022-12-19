@@ -1,5 +1,9 @@
 # react-native-airship
 
+## 0.2.11 (2022-12-19)
+
+- fixed: Extra call to `handleLayout` within `Barometer` to fix edge-case for incorrect screen layout calculations.
+
 ## 0.2.10 (2022-09-16)
 
 - changed: Default to Default to `AirshipBridge<void>` instead of `AirshipBridge<unknown>`. This change may cause new TypeScript errors to appear, but it is not a breaking change - the cases were always broken, but TypeScript simply wasn't reporting the errors.
