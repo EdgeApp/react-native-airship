@@ -157,7 +157,6 @@ export function Barometer(props: Props): JSX.Element {
         accessible={false}
         pointerEvents="none"
         style={StyleSheet.absoluteFill}
-        testID="AirshipBarometer"
         onLayout={handleLayout}
       />
     )
@@ -169,15 +168,9 @@ export function Barometer(props: Props): JSX.Element {
       accessible={false}
       pointerEvents="none"
       style={StyleSheet.absoluteFill}
-      testID="AirshipBarometer"
       onLayout={handleLayout}
     >
-      <View
-        ref={childView}
-        accessible={false}
-        style={{ flex: 1 }}
-        testID="AirshipBarometerChild"
-      />
+      <View ref={childView} accessible={false} style={{ flex: 1 }} />
     </SafeAreaView>
   )
 }
