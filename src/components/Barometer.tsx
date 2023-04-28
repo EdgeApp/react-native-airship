@@ -27,7 +27,6 @@ export interface BarometerLayout {
 }
 
 interface Props {
-  children?: React.ReactNode
   onLayout?: (layout: BarometerLayout) => void
 }
 
@@ -50,7 +49,7 @@ const emptySides: SideList = [0, 0, 0, 0]
  * scheduling animations as needed.
  */
 export function Barometer(props: Props): JSX.Element {
-  const { children, onLayout = () => {} } = props
+  const { onLayout = () => {} } = props
 
   // Mutable state:
   const keyboardHeight = React.useRef<number>(0)
@@ -155,27 +154,30 @@ export function Barometer(props: Props): JSX.Element {
     return (
       <View
         ref={view}
-        onLayout={handleLayout}
+        accessible={false}
         pointerEvents="none"
         style={StyleSheet.absoluteFill}
         testID="AirshipBarometer"
-      >
-        {children}
-      </View>
+        onLayout={handleLayout}
+      />
     )
   }
 
   return (
     <SafeAreaView
       ref={view}
-      onLayout={handleLayout}
+      accessible={false}
       pointerEvents="none"
       style={StyleSheet.absoluteFill}
       testID="AirshipBarometer"
+      onLayout={handleLayout}
     >
-      <View ref={childView} style={{ flex: 1 }} testID="AirshipBarometerChild">
-        {children}
-      </View>
+      <View
+        ref={childView}
+        accessible={false}
+        style={{ flex: 1 }}
+        testID="AirshipBarometerChild"
+      />
     </SafeAreaView>
   )
 }
