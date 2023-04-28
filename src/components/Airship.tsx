@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { View } from 'react-native'
-import { Event, Events, makeEvent, makeEvents } from 'yavent'
+import { makeEvent, makeEvents } from 'yavent'
 
 import {
   Airship,
@@ -27,8 +27,8 @@ const emptyLayout: BarometerLayout = {
  */
 export function makeAirship(): Airship {
   // Static state shared by all mounted containers:
-  const [onClear, emitClear]: Event<void> = makeEvent()
-  const [onGuestsChange, emitGuestsChange]: Event<Guest[]> = makeEvent()
+  const [onClear, emitClear] = makeEvent<undefined>()
+  const [onGuestsChange, emitGuestsChange] = makeEvent<Guest[]>()
   let guests: Guest[] = []
   let nextKey: number = 0
 
@@ -83,9 +83,9 @@ export function makeAirship(): Airship {
     }
 
     // Assemble the bridge:
-    const [on, emit]: Events<AirshipEvents> = makeEvents()
+    const [on, emit] = makeEvents<AirshipEvents>()
     let bridge!: AirshipBridge<T>
-    const promise: Promise<T> = new Promise((resolve, reject) => {
+    const promise = new Promise<T>((resolve, reject) => {
       bridge = {
         on,
         onResult: callback => on('result', callback),

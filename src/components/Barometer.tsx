@@ -53,15 +53,15 @@ export function Barometer(props: Props): JSX.Element {
   const { children, onLayout = () => {} } = props
 
   // Mutable state:
-  const keyboardHeight: React.MutableRefObject<number> = React.useRef(0)
-  const lastLayoutJson: React.MutableRefObject<string> = React.useRef('')
-  const view: React.RefObject<SafeAreaView | View> = React.useRef(null)
-  const childView: React.RefObject<View> = React.useRef(null)
+  const keyboardHeight = React.useRef<number>(0)
+  const lastLayoutJson = React.useRef<string>('')
+  const view = React.useRef<SafeAreaView | View>(null)
+  const childView = React.useRef<View>(null)
 
   // Handle layout changes:
   const handleLayout = React.useCallback((): void => {
     // Measure the view in the window:
-    const viewPromise: Promise<SideList> = new Promise(resolve => {
+    const viewPromise = new Promise<SideList>(resolve => {
       if (view.current == null) return resolve(emptySides)
       view.current.measureInWindow((x, y, width, height) => {
         const window = Dimensions.get('window')
@@ -70,7 +70,7 @@ export function Barometer(props: Props): JSX.Element {
     })
 
     // Measure the child view in the window:
-    const childPromise: Promise<SideList> = new Promise(resolve => {
+    const childPromise = new Promise<SideList>(resolve => {
       if (childView.current == null) return resolve(viewPromise)
       childView.current.measureInWindow((x, y, width, height) => {
         const window = Dimensions.get('window')
@@ -79,7 +79,7 @@ export function Barometer(props: Props): JSX.Element {
     })
 
     // Measure the gap between the bottom of the screen and the view:
-    const bottomPromise: Promise<number> = new Promise(resolve => {
+    const bottomPromise = new Promise<number>(resolve => {
       if (view.current == null) return 0
       view.current.measure((x, y, width, height, screenX, screenY) => {
         const screen = Dimensions.get('screen')
