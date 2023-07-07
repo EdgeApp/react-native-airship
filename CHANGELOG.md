@@ -1,5 +1,9 @@
 # react-native-airship
 
+## 0.2.12 (2023-07-07)
+
+- fixed: Make the barometer component non-accessible.
+
 ## 0.2.11 (2022-12-19)
 
 - fixed: Extra call to `handleLayout` within `Barometer` to fix edge-case for incorrect screen layout calculations.
