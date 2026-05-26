@@ -24,10 +24,10 @@ If these don't do what you want, you can easily [write your own components](./do
 
 ## Setup
 
-Install `react-native-airship` using either NPM or yarn:
+Install `react-native-airship` using either NPM or npm install:
 
 ```sh
-yarn add react-native-airship
+npm install react-native-airship
 # or:
 npm i -s react-native-airship
 ```
@@ -60,4 +60,4 @@ There is also an `Airship.clear` method that can quickly remove everything mount
 
 ## Demo
 
-This repository includes a [demo application](./AirshipDemo/) you can use to try out the Airship. You will need to run `yarn install` or `npm install` separately in that folder to set up the demo, and then run either `react-native run-android` or `react-native run-ios` to start the demo.
+This repository includes a [demo application](./AirshipDemo/) you can use to try out the Airship. You will need to run `npm install` or `npm install` separately in that folder to set up the demo, and then run either `react-native run-android` or `react-native run-ios` to start the demo.
