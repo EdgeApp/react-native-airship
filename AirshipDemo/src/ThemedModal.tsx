@@ -13,7 +13,7 @@ export function ThemedModal<T>(props: AirshipModalProps<T>): JSX.Element {
     <AirshipModal
       backgroundColor={theme.background}
       borderRadius={theme.rem(1)}
-      margin={center ? theme.rem(0.5) : 0}
+      margin={center === true ? theme.rem(0.5) : 0}
       padding={theme.rem(1)}
       underlay={<BlurView blurType="dark" style={StyleSheet.absoluteFill} />}
       {...props}

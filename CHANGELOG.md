@@ -1,5 +1,7 @@
 # react-native-airship
 
+## Unreleased
+
 ## 0.2.12 (2023-07-07)
 
 - fixed: Make the barometer component non-accessible.
